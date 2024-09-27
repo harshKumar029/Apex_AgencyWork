@@ -46,7 +46,7 @@ const SideBar = () => {
               <li
                 key={index}
                 className="menu-item flex items-center py-[.4rem] hover:text-[#063E50] cursor-pointer"
-                onClick={() => navigate(item.path, { state: { label: item.label } })}
+                onClick={() => navigate(item.path)}
               >
                 <img
                   src={item.icon}

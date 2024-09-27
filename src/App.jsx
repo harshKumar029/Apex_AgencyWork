@@ -11,6 +11,10 @@ import Passchange from './Components/Login&Signup/Passchange';
 import Header from './Components/Header';
 import Leads from './Components/MyLeads';
 import MyLeads from './Components/MyLeads';
+import Paymentdetails from './Components/Paymentdetails';
+import Earnings from './Components/Earnings';
+import Trainings from './Components/Trainings';
+import Mydocument from './Components/Mydocument';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,19 +44,19 @@ function App() {
           <Route path="/password/reset/Passchange" element={<Passchange/>} />
 
           {/* Protected Route */}
-          <Route path="/" element={<AuthLayout><Header><Dashboard /></Header></AuthLayout>} />
-          <Route path="/leads" element={<AuthLayout><Header><MyLeads/></Header></AuthLayout>} />
-          <Route path="/team" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/paymentdetail" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/earning" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/documents" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/training" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/my-level" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/my-website" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/language" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/support" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/terms" element={<AuthLayout><Header></Header></AuthLayout>} />
-          <Route path="/settings" element={<AuthLayout><Header></Header></AuthLayout>} />
+          <Route path="/" element={<AuthLayout><Header title="Dashboard"><Dashboard /></Header></AuthLayout>} />
+          <Route path="/leads" element={<AuthLayout><Header title="My Leads"><MyLeads/></Header></AuthLayout>} />
+          <Route path="/team" element={<AuthLayout><Header title="My Team"></Header></AuthLayout>} />
+          <Route path="/paymentdetail" element={<AuthLayout><Header title="Payment Detail"><Paymentdetails/></Header></AuthLayout>} />
+          <Route path="/earning" element={<AuthLayout><Header title="My Earning"><Earnings/></Header></AuthLayout>} />
+          <Route path="/documents" element={<AuthLayout><Header title="My Documents"><Mydocument/></Header></AuthLayout>} />
+          <Route path="/training" element={<AuthLayout><Header title="Training"><Trainings/></Header></AuthLayout>} />
+          <Route path="/my-level" element={<AuthLayout><Header title="My Level"></Header></AuthLayout>} />
+          <Route path="/my-website" element={<AuthLayout><Header title="My Website"></Header></AuthLayout>} />
+          <Route path="/language" element={<AuthLayout><Header  title="Language"></Header></AuthLayout>} />
+          <Route path="/support" element={<AuthLayout><Header title="Support"></Header></AuthLayout>} />
+          <Route path="/terms" element={<AuthLayout><Header title="Terms & Conditions"></Header></AuthLayout>} />
+          <Route path="/settings" element={<AuthLayout><Header title="Setting"></Header></AuthLayout>} />
         </Routes>
       )}
     </Router>

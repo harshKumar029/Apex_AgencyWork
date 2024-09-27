@@ -1,12 +1,14 @@
 import React from 'react';
 import SideBar from './SideBar';
-// import TopBar from './TopBar';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div className="flex m-auto">
-          <SideBar/>
-            <div className=" ml-auto w-[95vw]">
+        <div className="flex">
+            <div className="fixed h-full w-64">
+                <SideBar />
+            </div>
+            
+            <div className="ml-64 w-full"> 
                 {children}
             </div>
         </div>

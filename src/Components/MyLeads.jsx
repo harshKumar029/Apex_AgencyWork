@@ -1,11 +1,282 @@
-import React from 'react'
+// import React, { useState } from 'react';
+
+// const MyLeads = () => {
+//     // State to track which filter button is selected
+//     const [activeFilter, setActiveFilter] = useState('All');
+
+//     // Dummy data for the table based on the selected filter
+//     const tableData = {
+//       All: [
+//         { id: 1, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+//         { id: 2, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+//         { id: 3, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+//         { id: 4, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+//         { id: 5, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+//         { id: 6, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+//         { id: 7, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+//         { id: 8, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+//         { id: 9, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+//         { id: 10, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+//       ],
+//       Brand: [
+//         { id: 1, name: 'Brand 1', service: 'Brand Service', bank: 'Citi', date: '2024-09-25', amount: '$300', receipt: 'Yes' },
+//       ],
+//       Fulfill: [
+//         { id: 1, name: 'Fulfilled Lead', service: 'Hosting', bank: 'Wells Fargo', date: '2024-09-26', amount: '$100', receipt: 'Yes' },
+//       ],
+//       Pending: [
+//         { id: 1, name: 'Pending Lead', service: 'SSL Certificate', bank: 'HSBC', date: '2024-09-22', amount: '$50', receipt: 'No' },
+//       ],
+//       Rejected: [
+//         { id: 1, name: 'Rejected Lead', service: 'Email Hosting', bank: 'Barclays', date: '2024-09-20', amount: '$80', receipt: 'No' },
+//       ],
+//       Expire: [
+//         { id: 1, name: 'Expired Lead', service: 'Cloud Storage', bank: 'Capital One', date: '2024-09-19', amount: '$70', receipt: 'Yes' },
+//       ],
+//     };
+//   return (
+//     <div className="px-9 pt-5">
+//     {/* Header */}
+//     <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Active Leads</h1>
+
+//     {/* Buttons for filtering the table */}
+//     <div className="flex justify-between items-center mb-4">
+//       {/* Left-side buttons */}
+//       <div className="space-x-4">
+//         {['All', 'Brand', 'Fulfill', 'Pending', 'Rejected', 'Expire'].map((filter) => (
+//           <button
+//             key={filter}
+//             onClick={() => setActiveFilter(filter)}
+//             className={`py-2 px-4 rounded-full ${activeFilter === filter ? 'bg-[#063E50] text-white' : ' border border-[#063E50] text-[#063E50]'}`}
+//           >
+//             {filter}
+//           </button>
+//         ))}
+//       </div>
+
+//       {/* Right-side download button */}
+//       <button className="py-2 px-3  border border-[#063E50] flex items-center gap-2 text-[#063E50] rounded-full">
+//         <svg class="w-6 h-6 text-[#063E50] dark:text-[#063E50]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+//           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4" />
+//         </svg>
+
+//         Download Report</button>
+//     </div>
+
+//     {/* Table */}
+//     <div className="overflow-x-auto">
+//       <table className="min-w-full bg-white  text-left">
+//         <thead className=' text-[#063E50] font-medium text-base border-b border-[#DEE2E6]'>
+//           <tr>
+//             <th className="px-4 py-2">Sl No</th>
+//             <th className="px-4 py-2">Name</th>
+//             <th className="px-4 py-2">Service</th>
+//             <th className="px-4 py-2">Bank Chosen</th>
+//             <th className="px-4 py-2">Date</th>
+//             <th className="px-4 py-2">Amount</th>
+//             <th className="px-4 py-2 text-center">Receipt</th>
+//           </tr>
+//         </thead>
+//         <tbody className='text-left text-base text-[#212529] font-normal'>
+//           {/* Render table rows based on the selected filter */}
+//           {tableData[activeFilter].map((row) => (
+//             <tr key={row.id}>
+//               <td className="px-4 py-2">{row.id}</td>
+//               <td className="px-4 py-2">{row.name}</td>
+//               <td className="px-4 py-2">{row.service}</td>
+//               <td className="px-4 py-2">{row.bank}</td>
+//               <td className="px-4 py-2">{row.date}</td>
+//               <td className="px-4 py-2">{row.amount}</td>
+//               <td className="px-4 py-2 font-medium text-center  cursor-pointer">
+//                 <button className='px-4 py-2 text-[#063E50] border border-[#063E50] rounded-full'>
+//                 Download
+//                 </button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   </div>
+//   )
+// }
+
+// export default MyLeads
+
+
+import React, { useState } from 'react';
 
 const MyLeads = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // Number of items to show per page
 
-export default MyLeads
+  const tableData = {
+    All: [
+      { id: 1, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 2, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 3, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 4, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 5, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 6, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 7, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 8, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 9, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 10, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 11, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 12, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 13, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+      { id: 14, name: 'John Doe', service: 'Web Hosting', bank: 'Bank of America', date: '2024-09-25', amount: '$200', receipt: 'Yes' },
+      { id: 15, name: 'Jane Doe', service: 'Domain Purchase', bank: 'Chase', date: '2024-09-23', amount: '$150', receipt: 'No' },
+    ],
+    Brand: [
+      { id: 1, name: 'Brand 1', service: 'Brand Service', bank: 'Citi', date: '2024-09-25', amount: '$300', receipt: 'Yes' },
+    ],
+    Fulfill: [
+      { id: 1, name: 'Fulfilled Lead', service: 'Hosting', bank: 'Wells Fargo', date: '2024-09-26', amount: '$100', receipt: 'Yes' },
+    ],
+    Pending: [
+      { id: 1, name: 'Pending Lead', service: 'SSL Certificate', bank: 'HSBC', date: '2024-09-22', amount: '$50', receipt: 'No' },
+    ],
+    Rejected: [
+      { id: 1, name: 'Rejected Lead', service: 'Email Hosting', bank: 'Barclays', date: '2024-09-20', amount: '$80', receipt: 'No' },
+    ],
+    Expire: [
+      { id: 1, name: 'Expired Lead', service: 'Cloud Storage', bank: 'Capital One', date: '2024-09-19', amount: '$70', receipt: 'Yes' },
+    ],
+  };
+
+  // Calculate total pages
+  const totalPages = Math.ceil(tableData[activeFilter].length / itemsPerPage);
+
+  // Get the current items for the table
+  const currentItems = tableData[activeFilter].slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handlers for pagination
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <div className="px-9 pt-5">
+      {/* Header */}
+      <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Active Leads</h1>
+
+      {/* Buttons for filtering the table */}
+      <div className="flex justify-between items-center mb-4">
+        <div className="space-x-4">
+          {['All', 'Brand', 'Fulfill', 'Pending', 'Rejected', 'Expire'].map((filter) => (
+            <button
+              key={filter}
+              onClick={() => {
+                setActiveFilter(filter);
+                setCurrentPage(1); // Reset to first page on filter change
+              }}
+              className={`py-2 px-4 rounded-full ${activeFilter === filter ? 'bg-[#063E50] text-white' : ' border border-[#063E50] text-[#063E50]'}`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        <button className="py-2 px-3 border border-[#063E50] flex items-center gap-2 text-[#063E50] rounded-full">
+          <svg className="w-6 h-6 text-[#063E50]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19V5m0 14-4-4m4 4 4-4" />
+          </svg>
+          Download Report
+        </button>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white text-left">
+          <thead className='text-[#063E50] font-medium text-base border-b border-[#DEE2E6]'>
+            <tr>
+              <th className="px-4 py-2">Sl No</th>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">Service</th>
+              <th className="px-4 py-2">Bank Chosen</th>
+              <th className="px-4 py-2">Date</th>
+              <th className="px-4 py-2">Amount</th>
+              <th className="px-4 py-2 text-center">Receipt</th>
+            </tr>
+          </thead>
+          <tbody className='text-left text-base text-[#212529] font-normal'>
+            {/* Render table rows based on the selected filter */}
+            {currentItems.map((row) => (
+              <tr key={row.id}>
+                <td className="px-4 py-2">{row.id}</td>
+                <td className="px-4 py-2">{row.name}</td>
+                <td className="px-4 py-2">{row.service}</td>
+                <td className="px-4 py-2">{row.bank}</td>
+                <td className="px-4 py-2">{row.date}</td>
+                <td className="px-4 py-2">{row.amount}</td>
+                <td className="px-4 py-2 font-medium text-center cursor-pointer">
+                  <button className='px-4 py-2 text-[#063E50] border border-[#063E50] rounded-full'>
+                    Download
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-end items-center mt-4">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className={`py-2 px-4 flex items-center font-medium ${currentPage === 1 ? ' text-gray-500 cursor-not-allowed' : ' text-[#063E50]'} rounded`}
+        >
+
+          <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
+          </svg>
+
+
+          Previous
+        </button>
+
+        {/* Page Numbers */}
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className={`py-2 px-4 mx-1 rounded-lg ${currentPage === index + 1 ? 'bg-[#063E50] text-white' : ' text-[#063E50]'}`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className={`py-2 px-4 flex items-center font-medium ${currentPage === totalPages ? ' text-gray-500 cursor-not-allowed' : ' text-[#063E50]'} rounded`}
+        >
+          Next
+          <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default MyLeads;

@@ -16,3 +16,27 @@ body {
     font-size: 60%;
   }
 }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0; /* Ensures it stays on the left */
+  bottom: 0; /* Stretches it to the bottom */
+  overflow-y: auto; /* Allows scrolling if sidebar content exceeds viewport height */
+}
+
+
+/* Hide scrollbar for webkit browsers */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* Optional: Additional styles to ensure smooth scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  overflow-y: hidden; /* Disable vertical scrolling if you want */
+}
