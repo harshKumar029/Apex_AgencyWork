@@ -1,7 +1,7 @@
 // import React from 'react'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import ApexLogo from '../../assets/icon/ApexLogo.svg'
+import Apexlogo from '../../assets/icon/Apexlogo.svg'
 import Google from '../../assets/icon/Google.svg'
 import Facebook from '../../assets/icon/Facebook.svg'
 import CardImg from '../../assets/img/CardImg.svg'
@@ -29,7 +29,7 @@ const Signup = () => {
     return (
         <div className='bg-blue-primary flex h-[100vh]'>
             <section className='  py-8 px-14 space-y-3 '>
-                {/* <img className=' w-36' src={ApexLogo} alt='ApexLogo' /> */}
+                <img className=' w-36' src={Apexlogo} alt='ApexLogo' />
                 <div className=' text-white'>
                     <h1 className=' text-[2.5rem] font-medium'>Your <b className=' font-extrabold'>Financial Future</b> Starts Here</h1>
                     <h3>Join our growing community of successful agents.</h3>
