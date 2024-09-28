@@ -3,13 +3,10 @@ import setting from "../assets/icon/SidebarIcon/setting.svg"
 import Notification from "../assets/icon/Notification.svg"
 import Search from "../assets/icon/Search.svg"
 import Userimg from "../assets/img/Userimg.svg"
-import { useLocation } from 'react-router-dom';
 
-const Header = ({ title, children }) => {
-    // const location = useLocation();
-    // const { label } = location.state || {}; 
+const Header = ({ title, showSearch = true, children }) => {
     return (
-        <>
+        <div>
             <div className="flex items-center justify-between p-4 px-8 bg-white border-b border-[#DEE2E6]">
                 {/* Left Section (Heading) */}
                 <h1 className=" text-3xl text-[#343C6A] font-semibold">{title}</h1>
@@ -17,24 +14,21 @@ const Header = ({ title, children }) => {
                 {/* Right Section (Search, Settings, Notification, Profile) */}
                 <div className="flex items-center space-x-10">
                     {/* Search Input */}
-                    {/* <input
-                    type="text"
-                    placeholder="Search for something"
-                    className="placeholder:font-normal placeholder:text-[16px] placeholder:text-[#ADB5BD]  rounded-3xl bg-[#F8FAFA] px-3 py-1.5 outline-none"
-                /> */}
-                    {/* F8FAFA */}
-                    <div className="relative">
-                        <input
-                            type="text"
-                            placeholder="Search for something"
-                            className="placeholder:font-normal placeholder:text-[16px] placeholder:text-[#ADB5BD] bg-[#F8FAFA] rounded-3xl px-10 py-1.5 outline-none w-full"
-                        />
-                        <img
-                            src={Search}
-                            alt="Search"
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
-                        />
-                    </div>
+                    {!showSearch && (
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Search for something"
+                                className="placeholder:font-normal placeholder:text-[16px] placeholder:text-[#ADB5BD] bg-[#F8FAFA] rounded-3xl px-10 py-1.5 outline-none w-full"
+                            />
+                            <img
+                                src={Search}
+                                alt="Search"
+                                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+                            />
+                        </div>
+                    )}
+
 
 
                     {/* Settings Icon */}
@@ -45,11 +39,11 @@ const Header = ({ title, children }) => {
                     />
 
                     {/* Notification Icon */}
-                    <img
+                    {/* <img
                         src={Notification}
                         alt="Notification"
                         className="w-9 h-9 cursor-pointer bg-[#F8FAFA] p-1 rounded-3xl"
-                    />
+                    /> */}
 
                     {/* Profile Circle */}
                     <img
@@ -62,7 +56,7 @@ const Header = ({ title, children }) => {
             <main>
                 {children}
             </main>
-        </>
+        </div>
     );
 };
 

@@ -23,14 +23,14 @@ const SideBar = () => {
   const menuItems = [
     { icon: Dashboard, label: "Dashboard", path: "/" },
     { icon: Leads, label: "My Leads", path: "/leads" },
-    { icon: Team, label: "My Team", path: "/team" },
+    // { icon: Team, label: "My Team", path: "/team" },
     { icon: Paymentdetail, label: "Payment Detail", path: "/paymentdetail" },
     { icon: Earning, label: "My Earning", path: "/earning" },
     { icon: Documents, label: "My Documents", path: "/documents" },
     { icon: Training, label: "Training", path: "/training" },
     { icon: MyLevel, label: "My Level", path: "/my-level" },
-    { icon: Mywebsite, label: "My Website", path: "/my-website" },
-    { icon: Language, label: "Language", path: "/language" },
+    // { icon: Mywebsite, label: "My Website", path: "/my-website" },
+    // { icon: Language, label: "Language", path: "/language" },
     { icon: Support, label: "Support", path: "/support" },
     { icon: Tearm_Condition, label: "Terms & Conditions", path: "/terms" },
     { icon: setting, label: "Setting", path: "/settings" },
@@ -39,13 +39,13 @@ const SideBar = () => {
   return (
     <div className="border-r-[0.5px] border-[#DEE2E6] text-[#ADB5BD] h-screen w-64 flex flex-col">
       <div className="w-fit mx-auto">
-        <img className="ml-1 w-16 mt-1" src={ApexLogo} alt="ApexLogo" />
-        <div className="space-y-3">
-          <ul className="menu-list max-w-fit mt-4">
+        <img className="ml-1 w-16 mt-4" src={ApexLogo} alt="ApexLogo" />
+        <div className="space-y-4">
+          <ul className="menu-list max-w-fit mt-5">
             {menuItems.map((item, index) => (
               <li
                 key={index}
-                className="menu-item flex items-center py-[.4rem] hover:text-[#063E50] cursor-pointer"
+                className="menu-item flex items-center py-[.6rem] hover:text-[#063E50] cursor-pointer"
                 onClick={() => navigate(item.path)}
               >
                 <img
