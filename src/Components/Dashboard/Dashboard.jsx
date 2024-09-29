@@ -81,7 +81,7 @@ const Dashboard = () => {
               Choose from the services below</p>
           </div>
         </div>
-        <div className="grid smgrid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {cardData.map((card) => (
             <div key={card.id} className='border border-[#DEE2E6] rounded-3xl'>
               <div className="flex items-center  p-4 ">
