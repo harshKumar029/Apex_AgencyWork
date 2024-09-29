@@ -97,7 +97,7 @@ import Support from "../assets/icon/SidebarIcon/Support.svg";
 import Team from "../assets/icon/SidebarIcon/Team.svg";
 import Tearm_Condition from "../assets/icon/SidebarIcon/Tearm&Condition.svg";
 import Training from "../assets/icon/SidebarIcon/Training.svg";
-// import ApexLogo from "../assets/icon/SidebarIcon/ApexLogo.svg";
+import ApexLogo from "../assets/icon/SidebarIcon/ApexLogo.svg";
 import Share from "../assets/icon/SidebarIcon/Share.svg";
 
 const SideBar = () => {
@@ -132,12 +132,12 @@ const SideBar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen md:w-[17%] w-64 bg-white border-r transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
+        className={`fixed left-0 top-0 h-full md:w-[17%] w-64 bg-white border-r transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
       >
         <div className="border-r-[0.5px] border-[#DEE2E6] text-[#ADB5BD] h-full flex flex-col">
           <div className="w-fit mx-auto">
             <div className=' flex justify-between ml-1 mt-4 '>
-              {/* <img className=" w-16" src={ApexLogo} alt="ApexLogo" /> */}
+              <img className=" w-16" src={ApexLogo} alt="ApexLogo" />
               {/* Toggle Button */}
               {/* <button
                 className="md:hidden p-2"
