@@ -4,11 +4,11 @@ import SideBar from './SideBar';
 const AuthLayout = ({ children }) => {
     return (
         <div className="flex">
-            <div className="fixed h-full w-64">
+            <div className="fixed h-full z-[1000]">
                 <SideBar />
             </div>
             
-            <div className="ml-64 w-full"> 
+            <div className=" w-[100%] md:w-[83%] ml-auto"> 
                 {children}
             </div>
         </div>

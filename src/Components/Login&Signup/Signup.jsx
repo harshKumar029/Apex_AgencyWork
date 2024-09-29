@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Apexlogo from '../../assets/icon/Apexlogo.svg'
+import Apexlogoblue from '../../assets/icon/Apexlogoblue.svg'
 import Google from '../../assets/icon/Google.svg'
 import Facebook from '../../assets/icon/Facebook.svg'
 import CardImg from '../../assets/img/CardImg.svg'
@@ -27,21 +28,24 @@ const Signup = () => {
         console.log('Form Data Submitted:', formData);
     };
     return (
-        <div className='bg-blue-primary flex h-[100vh]'>
-            <section className='  py-8 px-14 space-y-3 '>
+        <div className='md:bg-blue-primary bg-white flex h-[100vh]'>
+            <section className=' pt-4 hidden md:block  pb-8 px-14 space-y-3 '>
                 <img className=' w-36' src={Apexlogo} alt='ApexLogo' />
                 <div className=' text-white'>
-                    <h1 className=' text-[2.5rem] font-medium'>Your <b className=' font-extrabold'>Financial Future</b> Starts Here</h1>
+                    <h1 className=' text-[2.3rem] font-medium'>Your <b className=' font-extrabold'>Financial Future</b> Starts Here</h1>
                     <h3>Join our growing community of successful agents.</h3>
-                    <img className=' absolute left-0 bottom-20' src={CardImg} alt='CardImg' />
+                    <img className=' absolute w-[32rem] left-0 bottom-20' src={CardImg} alt='CardImg' />
                 </div>
             </section>
-            <section className="w-[120vw] h-screen bg-white rounded-l-[2.738rem] flex items-center justify-end">
-                <div className="w-[45vw] mr-28 space-y-7">
+            <section className="w-[120vw] h-screen mt-10 md:mt-0 bg-white rounded-l-[2.738rem] flex md:items-center justify-center md:justify-end">
+                <div className="md:w-[45vw] w-[90vw] px-5 md:mr-28 space-y-20 md:space-y-7">
 
-                    <h2 className=" text-[#525252] text-4xl font-bold mb-6 ">Log In To Your Account </h2>
-                    <form onSubmit={handleSubmit} className='space-y-7'>
-                    <div className="mb-6">
+                    <div className=' flex justify-between'>
+                        <h2 className=" self-end md:self-auto text-[#525252] text-4xl font-bold mb-6 ">Create Account </h2>
+                        <img className=' md:hidden block  w-36' src={Apexlogoblue} alt='ApexLogo' />
+                    </div>
+                    <form onSubmit={handleSubmit} className='space-y-14 md:space-y-7'>
+                        <div className="mb-6">
                             <input
                                 type="text"
                                 id="fullname"
@@ -89,10 +93,10 @@ const Signup = () => {
                                 required
                             />
                         </div>
-                    
+
                         <button
                             type="submit"
-                            className="w-full bg-blue-primary text-white py-2 px-4 font-semibold rounded-lg hover:bg-[#053748] transition-colors"
+                            className="w-full bg-blue-primary text-white  py-3 md:py-2 px-4 font-semibold rounded-lg hover:bg-[#053748] transition-colors"
                         >
                             Create Account
                         </button>

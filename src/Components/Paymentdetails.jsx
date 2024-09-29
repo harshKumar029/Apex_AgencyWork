@@ -6,7 +6,7 @@ const Paymentdetails = () => {
       <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Payment details</h1>
       
       {/* Input Fields */}
-      <div className="space-y-4 w-[50%]">
+      <div className="space-y-4 sm:w-[50%]">
         <div>
           <label className="block text-black mb-1" htmlFor="pan">
             PAN Card Number <span className="text-red-500">*</span>
@@ -61,8 +61,8 @@ const Paymentdetails = () => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end w-[95%] mt-8">
-        <button className="bg-[#063E50] text-white py-2 px-12 rounded-full">
+      <div className="flex justify-center sm:justify-end mt-8">
+        <button className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full">
           Save
         </button>
       </div>

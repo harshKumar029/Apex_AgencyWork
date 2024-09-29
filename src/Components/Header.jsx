@@ -1,41 +1,31 @@
 import React from 'react';
 import setting from "../assets/icon/SidebarIcon/setting.svg"
 import Notification from "../assets/icon/Notification.svg"
-import Search from "../assets/icon/Search.svg"
 import Userimg from "../assets/img/Userimg.svg"
+import Searchbar from './Searchbar';
 
 const Header = ({ title, showSearch = true, children }) => {
     return (
         <div>
             <div className="flex items-center justify-between p-4 px-8 bg-white border-b border-[#DEE2E6]">
                 {/* Left Section (Heading) */}
+                <div className='md:hidden block'></div>
                 <h1 className=" text-3xl text-[#343C6A] font-semibold">{title}</h1>
 
                 {/* Right Section (Search, Settings, Notification, Profile) */}
                 <div className="flex items-center space-x-10">
                     {/* Search Input */}
+                    <div className='hidden sm:block'>
                     {!showSearch && (
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Search for something"
-                                className="placeholder:font-normal placeholder:text-[16px] placeholder:text-[#ADB5BD] bg-[#F8FAFA] rounded-3xl px-10 py-1.5 outline-none w-full"
-                            />
-                            <img
-                                src={Search}
-                                alt="Search"
-                                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
-                            />
-                        </div>
+                        <Searchbar />
                     )}
-
-
+                    </div>
 
                     {/* Settings Icon */}
                     <img
                         src={setting}
                         alt="Settings"
-                        className="w-9 h-9 cursor-pointer bg-[#F8FAFA] p-1 rounded-3xl"
+                        className="w-9 h-9 hidden sm:block cursor-pointer bg-[#F8FAFA] p-1 rounded-3xl"
                     />
 
                     {/* Notification Icon */}

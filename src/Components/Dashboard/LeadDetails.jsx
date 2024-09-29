@@ -2,23 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LeadDetails = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const inputFields = [
-        { label: 'Customer Name', placeholder: 'Rohit Sharma' },
-        { label: 'PAN Card Number', placeholder: 'CDPH678R' },
-        { label: 'Date of Birth', placeholder: '02/12/1997' },
-        { label: 'Adhaar Card Number', placeholder: '5328910833645' },
-        { label: 'Email ID', placeholder: 'rohit.verma@gmail.com' },
-        { label: 'Company Name', placeholder: 'Infosys' },
-        { label: 'Mother Name', placeholder: 'Sushila Sharma' },
-        { label: 'Company Address', placeholder: 'Noida' },
-        { label: 'Father Name', placeholder: 'Suraj Sharma' },
-        { label: 'Designation', placeholder: 'Engineer' },
-        { label: 'Address', placeholder: 'Delhi, Shastri Park, U Block' },
-        { label: 'Official Email ID', placeholder: 'rohit@infosys.com' },
-        { label: 'Pin Code', placeholder: '110092' },
-      ];
+  const inputFields = [
+    { label: 'Customer Name', placeholder: 'Rohit Sharma' },
+    { label: 'PAN Card Number', placeholder: 'CDPH678R' },
+    { label: 'Date of Birth', placeholder: '02/12/1997' },
+    { label: 'Adhaar Card Number', placeholder: '5328910833645' },
+    { label: 'Email ID', placeholder: 'rohit.verma@gmail.com' },
+    { label: 'Company Name', placeholder: 'Infosys' },
+    { label: 'Mother Name', placeholder: 'Sushila Sharma' },
+    { label: 'Company Address', placeholder: 'Noida' },
+    { label: 'Father Name', placeholder: 'Suraj Sharma' },
+    { label: 'Designation', placeholder: 'Engineer' },
+    { label: 'Address', placeholder: 'Delhi, Shastri Park, U Block' },
+    { label: 'Official Email ID', placeholder: 'rohit@infosys.com' },
+    { label: 'Pin Code', placeholder: '110092' },
+  ];
   return (
     <div className='w-[95%] m-auto my-5'>
       <div className="flex items-center py-4 w-1/1">
@@ -38,7 +38,7 @@ const LeadDetails = () => {
       </div>
 
       {/* Form Input Fields */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {inputFields.map((field) => (
           <div key={field.label} className="flex flex-col">
             <label className="block text-[#212529] font-normal text-sm">
@@ -55,8 +55,8 @@ const LeadDetails = () => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end mt-8">
-        <button onClick={() =>navigate('/Dashboard/selectbank/Leaddetails/confirmation')} className="bg-[#063E50] text-white py-2 px-12 rounded-full">
+      <div className="flex justify-center sm:justify-end mt-8">
+        <button onClick={() => navigate('/Dashboard/selectbank/Leaddetails/confirmation')} className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full">
           Save
         </button>
       </div>
