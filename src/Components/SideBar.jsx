@@ -97,7 +97,7 @@ import Support from "../assets/icon/SidebarIcon/Support.svg";
 import Team from "../assets/icon/SidebarIcon/Team.svg";
 import Tearm_Condition from "../assets/icon/SidebarIcon/Tearm&Condition.svg";
 import Training from "../assets/icon/SidebarIcon/Training.svg";
-import ApexLogo from "../assets/icon/SidebarIcon/Apexlogo.svg";
+import ApexLogo from "../assets/icon/SidebarIcon/ApexLogo.svg";
 import Share from "../assets/icon/SidebarIcon/Share.svg";
 
 const SideBar = () => {
