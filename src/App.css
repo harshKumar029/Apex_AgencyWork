@@ -16,13 +16,13 @@ body {
 
 @media only screen and (max-width: 936px) {
   html {
-    font-size: 60%;
+    font-size: 64%;
   }
 }
 
 @media only screen and (max-width: 636px) {
   html {
-    font-size: 70%;
+    font-size: 90%;
   }
 }
 

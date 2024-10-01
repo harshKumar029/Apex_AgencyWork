@@ -31,7 +31,7 @@ const Dashboard = () => {
       {/* Row of Cards */}
       <div className="flex flex-col sm:flex-row sm:space-x-4 mb-6">
         {/* Card 1 - Full width on mobile, flex-grow to prevent excess space on desktop */}
-        <div className="flex flex-col sm:flex-grow py-4 w-full sm:w-auto">
+        <div className="flex flex-col items-center sm:items-start sm:flex-grow py-4 w-full justify-center sm:w-auto">
           <div>
             <h2 className="text-[#232323] font-semibold text-3xl">Welcome Shreya Verma!</h2>
             <p className="text-[#ADB5BD] font-normal text-xl">Explore our all features and services.</p>
