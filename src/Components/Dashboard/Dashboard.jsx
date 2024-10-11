@@ -41,7 +41,7 @@ const Dashboard = () => {
         {/* Container for Cards 2, 3, and 4 */}
         <div className="flex flex-col sm:flex-row sm:space-x-10 space-y-4 sm:space-y-0">
           {/* Card 2 */}
-          <div className="flex items-end sm:items-center justify-end rounded-3xl p-4 w-full sm:w-auto">
+          <div className=" hidden sm:flex items-end sm:items-center justify-end rounded-3xl p-4 w-full sm:w-auto">
             <div>
               <h2 className="text-[#232323] font-semibold text-base">Your Unique ID</h2>
               <p className="text-[#063E50] font-normal underline text-xs">123456</p>

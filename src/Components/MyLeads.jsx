@@ -166,7 +166,7 @@ const MyLeads = () => {
                 <td className="px-4 py-2">{row.amount}</td>
                 <td className="px-4 py-2 font-medium text-center cursor-pointer">
                   <button className='px-4 py-2 text-[#063E50] border border-[#063E50] rounded-full'>
-                    Download
+                    View
                   </button>
                 </td>
               </tr>

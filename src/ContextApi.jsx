@@ -8,10 +8,12 @@ export const useSidebar = () => {
 };
 
 export const SidebarProvider = ({ children }) => {
+    
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenProfile, setIsOpenProfile] = useState(false);
 
     return (
-        <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
+        <SidebarContext.Provider value={{ isOpen, setIsOpen, isOpenProfile, setIsOpenProfile }}>
             {children}
         </SidebarContext.Provider>
     );

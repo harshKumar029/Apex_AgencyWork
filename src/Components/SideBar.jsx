@@ -21,7 +21,7 @@ import { useSidebar } from '../ContextApi';
 const SideBar = () => {
   const navigate = useNavigate();
   // const [isOpen, setIsOpen] = useState(false);
-  const { isOpen, setIsOpen } = useSidebar();
+  const { isOpen, setIsOpen, setIsOpenProfile } = useSidebar();
   const sidebarRef = useRef(null);
 
   const menuItems = [
@@ -35,6 +35,7 @@ const SideBar = () => {
     { icon: Support, label: "Support", path: "/support" },
     { icon: Tearm_Condition, label: "Terms & Conditions", path: "/terms" },
     { icon: setting, label: "Setting", path: "/settings" },
+    { icon: Logout, label: "Logout", path: "/login" },
   ];
 
   const handleClickOutside = (event) => {
@@ -51,7 +52,7 @@ const SideBar = () => {
   }, []);
 
   return (
-    <div className=' z-[1000]'>
+    <div className=' z-[1000]' onClick={()=> setIsOpenProfile(false)}>
       {/* Toggle Button */}
       {/* <button
         className="md:hidden p-6"
@@ -65,7 +66,7 @@ const SideBar = () => {
 
       {/* Sidebar */}
       <div
-      ref={sidebarRef}
+        ref={sidebarRef}
         className={`fixed left-0 top-0 h-full md:w-[17%] w-64 bg-white border-r transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
       >
         <div className="border-r-[0.5px] border-[#DEE2E6] text-[#ADB5BD] h-full flex flex-col">
@@ -73,15 +74,20 @@ const SideBar = () => {
             <div className=' flex justify-between ml-1 mt-4 '>
               <img className=" w-16" src={ApexLogo} alt="ApexLogo" />
               {/* Toggle Button */}
-              {/* <button
+              <button
                 className="md:hidden p-2"
                 onClick={() => setIsOpen(false)}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg> */}
+
+                <svg className=' w-6' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
 
-              </button> */}
+
+              </button>
             </div>
             <div className="space-y-4">
               <ul className="menu-list max-w-fit mt-5">
@@ -113,10 +119,10 @@ const SideBar = () => {
           <div className="mt-auto ">
             <hr className='border-t border-[#ADB5BD] mb-1' />
             <div className="w-fit mx-auto space-y-4 py-2">
-              <button className="flex items-center rounded-lg px-2 gap-2">
+              {/* <button className="flex items-center rounded-lg px-2 gap-2">
                 <img className="w-[1.125rem] mr-2" src={Logout} alt="Logout" />
                 Logout
-              </button>
+              </button> */}
               <p className="font-medium text-sm">Apex . All rights reserved</p>
             </div>
           </div>

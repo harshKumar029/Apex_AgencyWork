@@ -3,21 +3,30 @@ import { useNavigate } from 'react-router-dom';
 
 const LeadDetails = () => {
   const navigate = useNavigate();
+//   mobile no
+// RESIDENCE LANDMARK
+  
 
   const inputFields = [
     { label: 'Customer Name', placeholder: 'Rohit Sharma' },
+    { label: 'Father Name', placeholder: 'Suraj Sharma' },
+    { label: 'Mother Name', placeholder: 'Sushila Sharma' },
     { label: 'PAN Card Number', placeholder: 'CDPH678R' },
     { label: 'Date of Birth', placeholder: '02/12/1997' },
     { label: 'Adhaar Card Number', placeholder: '5328910833645' },
+    { label: 'Mobile Number', placeholder: '9876543210' },
     { label: 'Email ID', placeholder: 'rohit.verma@gmail.com' },
-    { label: 'Company Name', placeholder: 'Infosys' },
-    { label: 'Mother Name', placeholder: 'Sushila Sharma' },
-    { label: 'Company Address', placeholder: 'Noida' },
-    { label: 'Father Name', placeholder: 'Suraj Sharma' },
-    { label: 'Designation', placeholder: 'Engineer' },
     { label: 'Address', placeholder: 'Delhi, Shastri Park, U Block' },
-    { label: 'Official Email ID', placeholder: 'rohit@infosys.com' },
+    { label: 'RESIDENCE LANDMARK', placeholder: 'Gali No-2 opposite radisson blu. ' },
     { label: 'Pin Code', placeholder: '110092' },
+    { label: 'SALARIED/SELF EMPLOYED', placeholder: 'SALARIED'},
+    { label: 'Company Name', placeholder: 'Infosys' },
+    { label: 'Designation', placeholder: 'Engineer' },
+    { label: 'Company Address', placeholder: 'Noida' },
+    { label: 'COMPANY LANDMARK', placeholder: 'Plot No 1,2,5 Knowledge Park-4, Greater Noida' },
+    { label: 'COMPANY PINCODE', placeholder: '110018' },
+    { label: 'Official Email ID', placeholder: 'rohit@infosys.com' },
+    { label: 'NET SALARY', placeholder: '12,00,000' },
   ];
   return (
     <div className='w-[95%] m-auto my-5'>

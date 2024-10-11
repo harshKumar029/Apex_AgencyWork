@@ -38,13 +38,13 @@ const Signup = () => {
                 </div>
             </section>
             <section className="w-[120vw] h-screen mt-10 md:mt-0 bg-white rounded-l-[2.738rem] flex md:items-center justify-center md:justify-end">
-                <div className="md:w-[45vw] w-[90vw] px-5 md:mr-28 space-y-20 md:space-y-7">
+                <div className="md:w-[45vw] w-[90vw] px-5 md:mr-28 space-y-14 md:space-y-7">
 
                     <div className=' flex justify-between'>
                         <h2 className=" self-end md:self-auto text-[#525252] text-4xl font-bold mb-6 ">Create Account </h2>
                         <img className=' md:hidden block  w-36' src={Apexlogoblue} alt='ApexLogo' />
                     </div>
-                    <form onSubmit={handleSubmit} className='space-y-14 md:space-y-7'>
+                    <form onSubmit={handleSubmit} className='space-y-7'>
                         <div className="mb-6">
                             <input
                                 type="text"
@@ -102,7 +102,7 @@ const Signup = () => {
                         </button>
                     </form>
 
-                    <div className=' flex justify-center mt-6'>
+                    <div className=' flex justify-center mt-5'>
                         <p className=' text-[#ADB5BD] font-medium'>- OR -</p>
                     </div>
 
