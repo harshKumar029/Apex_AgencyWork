@@ -33,7 +33,7 @@ const Header = ({ title, showSearch = true, children }) => {
 
     return (
         <div  ref={ProfileRef}>
-            <div className="flex items-center justify-between p-4 px-8 bg-white border-b border-[#DEE2E6]">
+            <div className="flex items-center justify-between p-4 sm:px-8 bg-white border-b border-[#DEE2E6]">
                 {/* Left Section (Heading) */}
                 {/* <div className='md:hidden block'></div> */}
                 <button className="md:hidden " onClick={() => {setIsOpen(prev => !prev); setIsOpenProfile(false);}}>

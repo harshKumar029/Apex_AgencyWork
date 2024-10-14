@@ -21,9 +21,9 @@ const Earnings = () => {
             </div>
 
             {/* Row of Cards */}
-            <div className="flex justify-between mb-6">
+            <div className="flex justify-between w-1/1 mb-6">
                 {/* Card 1 */}
-                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-">
+                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-[30%] sm:w-auto">
                     <img src={MoneyIcon} alt="MoneyIcon" className="w-16 h-16 sm:mr-4 bg-[#8416DB0F] rounded-full p-4" />
                     <div className='text-center mx-auto'>
                         <h2 className="text-[#063E50] font-normal text-base">Total Earnings</h2>
@@ -32,7 +32,7 @@ const Earnings = () => {
                 </div>
 
                 {/* Card 2 */}
-                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 ">
+                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-[30%] sm:w-auto">
                     <img src={Paidtick} alt="Paidtick" className="w-16 h-16 sm:mr-4 bg-[#5DD32524] rounded-full p-4" />
                     <div  className='text-center mx-auto'>
                         <h2 className="text-[#063E50] font-normal text-base">Paid</h2>
@@ -41,7 +41,7 @@ const Earnings = () => {
                 </div>
 
                 {/* Card 3 */}
-                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4  ">
+                <div className="flex items-center flex-col sm:flex-row border border-[#DEE2E6] rounded-3xl p-4  w-[30%] sm:w-auto">
                     <img src={Warning} alt="Warning" className="w-16 h-16 sm:mr-4 bg-[#F47A7A14] rounded-full p-4" />
                     <div  className='text-center mx-auto'>
                         <h2 className="text-[#063E50] font-normal text-base">Pending</h2>

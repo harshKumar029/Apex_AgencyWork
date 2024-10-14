@@ -109,10 +109,6 @@ const MyLeads = () => {
           {currentItems.map((row) => (
             <div key={row.id} className="bg-white shadow-md rounded-lg p-4">
               <div className="flex justify-between mb-2">
-                <span className="font-bold">Sl No:</span>
-                <span>{row.id}</span>
-              </div>
-              <div className="flex justify-between mb-2">
                 <span className="font-bold">Name:</span>
                 <span>{row.name}</span>
               </div>
@@ -134,7 +130,7 @@ const MyLeads = () => {
               </div>
               <div className="flex justify-center">
                 <button className='px-4 py-2 text-[#063E50] border border-[#063E50] rounded-full'>
-                  Download
+                  View
                 </button>
               </div>
             </div>

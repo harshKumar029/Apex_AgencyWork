@@ -22,6 +22,7 @@ import SelectBankAcc from './Components/Dashboard/SelectBankAcc';
 import LeadDetails from './Components/Dashboard/LeadDetails';
 import ConfirmationPage from './Components/Dashboard/ConfirmationPage';
 import Setting from './Components/Setting';
+import Termandcondition from './Components/Termandcondition';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +69,7 @@ function App() {
           {/* <Route path="/my-website" element={<AuthLayout><Header title="My Website"></Header></AuthLayout>} /> */}
           {/* <Route path="/language" element={<AuthLayout><Header  title="Language"><Language/></Header></AuthLayout>} /> */}
           <Route path="/support" element={<AuthLayout><Header title="Support"><Support/></Header></AuthLayout>} />
-          <Route path="/terms" element={<AuthLayout><Header title="Terms & Conditions"></Header></AuthLayout>} />
+          <Route path="/terms" element={<AuthLayout><Header title="Terms & Conditions"><Termandcondition/></Header></AuthLayout>} />
           <Route path="/settings" element={<AuthLayout><Header title="Setting"><Setting/></Header></AuthLayout>} />
         </Routes>
       )}
