@@ -18,7 +18,7 @@ const Passchange = () => {
                 <div className=' text-white'>
                     <h1 className=' text-[2.5rem] font-medium'>Your <b className=' font-extrabold'>Financial Future</b> Starts Here</h1>
                     <h3>Join our growing community of successful agents.</h3>
-                    <img className=' absolute left-0 bottom-20' src={CardImg} alt='CardImg' />
+                    <img className=' absolute w-[32rem] left-0 bottom-20' src={CardImg} alt='CardImg' />
                 </div>
             </section>
             <section className="w-[120vw] h-screen bg-white rounded-l-[2.738rem] flex items-center justify-end">

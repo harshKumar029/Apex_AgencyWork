@@ -68,7 +68,7 @@ const MyLeads = () => {
   };
 
   return (
-    <div className="px-9 pt-5">
+    <div className=' w-[95%] m-auto my-5'>
       <div className='sm:hidden block w-full py-4 m-auto z-0'>
         <Searchbar />
       </div>
@@ -105,7 +105,7 @@ const MyLeads = () => {
 
       <div className="overflow-x-auto sm:hidden">
         {/* Card layout for mobile */}
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 mb-3">
           {currentItems.map((row) => (
             <div key={row.id} className="bg-white shadow-md rounded-lg p-4">
               <div className="flex justify-between mb-2">
@@ -206,7 +206,7 @@ const MyLeads = () => {
       </div> */}
 
       {/* Pagination Controls */}
-      <div className="flex justify-end items-center mt-4">
+      <div className="flex justify-end items-center ">
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
