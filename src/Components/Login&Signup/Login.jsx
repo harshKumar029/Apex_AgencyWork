@@ -132,7 +132,7 @@ const Login = () => {
     return (
         <div className='md:bg-blue-primary bg-white flex h-[100vh]'>
             {/* Left Section */}
-            <section className='pt-4 hidden md:block pb-8 px-14 space-y-3 relative'>
+            <section className='pt-4 hidden md:block pb-8 px-14 space-y-3 '>
                 <img className='w-36' src={ApexLogo} alt='ApexLogo' />
                 <div className='text-white'>
                     <h1 className='text-[2.5rem] font-medium'>
