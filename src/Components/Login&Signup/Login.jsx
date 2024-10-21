@@ -1,7 +1,11 @@
 // src/Components/Login&Signup/Login.jsx
 
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { useNavigate, useLocation } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
 import ApexLogo from '../../assets/icon/Apexlogo.svg';
 import Apexlogoblue from '../../assets/icon/Apexlogoblue.svg';
 import Google from '../../assets/icon/Google.svg';
@@ -9,6 +13,7 @@ import CardImg from '../../assets/img/CardImg.svg';
 
 // Firebase imports
 import { auth } from '../../firebase'; // Ensure the correct path to your firebase.js file
+<<<<<<< HEAD
 import { 
     signInWithEmailAndPassword, 
     signInWithPopup, 
@@ -17,6 +22,9 @@ import {
     sendEmailVerification, 
     signOut 
 } from 'firebase/auth';
+=======
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
 
 const Login = () => {
     const navigate = useNavigate();
@@ -56,6 +64,7 @@ const Login = () => {
             const user = userCredential.user;
             console.log('User logged in:', user.uid); // Debugging
 
+<<<<<<< HEAD
             if (user.emailVerified) {
                 // Email is verified, proceed to dashboard
                 setMessage({
@@ -80,6 +89,18 @@ const Login = () => {
                 // Sign out the user to prevent access
                 await signOut(auth);
             }
+=======
+            // Set success message
+            setMessage({
+                type: 'success',
+                text: 'Login successful! Redirecting to Dashboard...',
+            });
+
+            // Redirect after a short delay to allow user to read the message
+            setTimeout(() => {
+                navigate('/dashboard'); // Ensure this route exists in your App.jsx
+            }, 2000); // 2 seconds delay
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
         } catch (error) {
             console.error('Login error:', error); // Debugging
 
@@ -115,6 +136,7 @@ const Login = () => {
             const user = result.user;
             console.log('User logged in with Google:', user.uid); // Debugging
 
+<<<<<<< HEAD
             if (user.emailVerified) {
                 // Email is verified, proceed to dashboard
                 setMessage({
@@ -139,6 +161,18 @@ const Login = () => {
                 // Sign out the user to prevent access
                 await signOut(auth);
             }
+=======
+            // Set success message
+            setMessage({
+                type: 'success',
+                text: 'Login successful! Redirecting to Dashboard...',
+            });
+
+            // Redirect after a short delay
+            setTimeout(() => {
+                navigate('/dashboard'); // Ensure this route exists in your App.jsx
+            }, 2000); // 2 seconds delay
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
         } catch (error) {
             console.error('Google Sign-In error:', error); // Debugging
 
@@ -152,6 +186,7 @@ const Login = () => {
         }
     };
 
+<<<<<<< HEAD
     // Redirect authenticated users to Dashboard only if email is verified
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -182,6 +217,14 @@ const Login = () => {
                             text: 'Failed to send verification email. Please try again later.',
                         });
                     });
+=======
+    // Redirect authenticated users to Dashboard
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, redirect to Dashboard
+                navigate('/dashboard');
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
             }
         });
 
@@ -192,7 +235,11 @@ const Login = () => {
     return (
         <div className='md:bg-blue-primary bg-white flex h-[100vh]'>
             {/* Left Section */}
+<<<<<<< HEAD
             <section className='pt-4 hidden md:block pb-8 px-14 space-y-3 relative'>
+=======
+            <section className='pt-4 hidden md:block pb-8 px-14 space-y-3 '>
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
                 <img className='w-36' src={ApexLogo} alt='ApexLogo' />
                 <div className='text-white'>
                     <h1 className='text-[2.5rem] font-medium'>
@@ -310,4 +357,8 @@ const Login = () => {
 
 };
 
+<<<<<<< HEAD
 export default Login;
+=======
+export default Login;
+>>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
