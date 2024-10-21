@@ -27,6 +27,7 @@ import Setting from './Components/Setting';
 import Termandcondition from './Components/Termandcondition';
 import SideBar from './Components/SideBar';
 import ScrollToTop from './Components/ScrollToTop';
+import BottomNavigationBar from './Components/BottomNavigationBar'
 
 // Import ProtectedRoute
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -35,6 +36,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop/>
+      <BottomNavigationBar/>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
