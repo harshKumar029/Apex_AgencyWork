@@ -19,14 +19,9 @@ import { doc, getDoc } from 'firebase/firestore';
 const Dashboard = () => {
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   // State to store user's full name and uniqueID
   const [fullName, setFullName] = useState('');
   const [uniqueID, setUniqueID] = useState('');
-=======
-  // State to store user's full name
-  const [fullName, setFullName] = useState('');
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
   const [isLoading, setIsLoading] = useState(true); // Optional: loading state
   const [error, setError] = useState(null); // Optional: error state
 
@@ -44,11 +39,7 @@ const Dashboard = () => {
   ];
 
   useEffect(() => {
-<<<<<<< HEAD
     const fetchUserData = async () => {
-=======
-    const fetchUserFullName = async () => {
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
       try {
         const user = auth.currentUser;
         if (user) {
@@ -57,17 +48,11 @@ const Dashboard = () => {
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setFullName(userData.fullname || 'User'); // Default to 'User' if fullname not found
-<<<<<<< HEAD
             setUniqueID(userData.uniqueID || 'N/A'); // Default to 'N/A' if uniqueID not found
           } else {
             console.warn('No such user document!');
             setFullName('User'); // Default
             setUniqueID('N/A');
-=======
-          } else {
-            console.warn('No such user document!');
-            setFullName('User'); // Default
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
           }
         } else {
           console.warn('No authenticated user found!');
@@ -82,11 +67,7 @@ const Dashboard = () => {
       }
     };
 
-<<<<<<< HEAD
     fetchUserData();
-=======
-    fetchUserFullName();
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
   }, [navigate]);
 
   if (isLoading) {

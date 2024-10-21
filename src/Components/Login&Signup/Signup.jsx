@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 // src/Components/Login&Signup/Signup.jsx
 
-=======
-// Signup.jsx
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Apexlogo from '../../assets/icon/Apexlogo.svg';
@@ -12,13 +8,8 @@ import CardImg from '../../assets/img/CardImg.svg';
 
 // Import Firebase functions
 import { auth, db } from '../../firebase'; // Ensure the correct path
-<<<<<<< HEAD
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
-=======
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -35,7 +26,6 @@ const Signup = () => {
     text: '',
   });
 
-<<<<<<< HEAD
   const [isSubmitting, setIsSubmitting] = useState(false); // To prevent multiple submissions
 
   const handleChange = (e) => {
@@ -121,46 +111,6 @@ const Signup = () => {
       setTimeout(() => {
         navigate('/login');
       }, 5000); // 5 seconds delay
-=======
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Submitting form:', formData); // Debugging
-
-    try {
-      // Create user with Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      const user = userCredential.user;
-      console.log('User created:', user.uid); // Debugging
-
-      // Save additional user data to Firestore
-      await setDoc(doc(db, 'users', user.uid), {
-        fullname: formData.fullname,
-        mobile: formData.mobile,
-        email: formData.email,
-        uid: user.uid,
-      });
-      console.log('User data saved to Firestore'); // Debugging
-
-      // Set success message
-      setMessage({
-        type: 'success',
-        text: 'Registration successful! Redirecting to login...',
-      });
-
-      // Redirect to login after a short delay
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000); // 3 seconds delay
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
     } catch (error) {
       console.error('Signup error:', error); // Debugging
 
@@ -175,7 +125,6 @@ const Signup = () => {
         setTimeout(() => {
           navigate('/login');
         }, 3000); // 3 seconds delay
-<<<<<<< HEAD
       } else if (error.code === 'auth/weak-password') {
         setMessage({
           type: 'error',
@@ -183,30 +132,19 @@ const Signup = () => {
         });
       } else {
         // Set error message for other errors
-=======
-      } else {
-        // Set error message
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
         setMessage({
           type: 'error',
           text: error.message,
         });
       }
-<<<<<<< HEAD
     } finally {
       setIsSubmitting(false);
-=======
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
     }
   };
 
   return (
     <div className='md:bg-blue-primary bg-white flex h-[100vh]'>
-<<<<<<< HEAD
       <section className='pt-4 hidden md:block pb-8 px-14 space-y-3 relative'>
-=======
-      <section className='pt-4 hidden md:block pb-8 px-14 space-y-3'>
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
         <img className='w-36' src={Apexlogo} alt='ApexLogo' />
         <div className='text-white'>
           <h1 className='text-[2.3rem] font-medium'>
@@ -231,13 +169,9 @@ const Signup = () => {
               className={`p-4 mb-4 text-sm ${
                 message.type === 'success'
                   ? 'text-green-700 bg-green-100 rounded-lg'
-<<<<<<< HEAD
                   : message.type === 'error'
                   ? 'text-red-700 bg-red-100 rounded-lg'
                   : 'text-gray-700 bg-gray-100 rounded-lg'
-=======
-                  : 'text-red-700 bg-red-100 rounded-lg'
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
               }`}
               role="alert"
             >
@@ -265,15 +199,10 @@ const Signup = () => {
                 name='mobile'
                 value={formData.mobile}
                 onChange={handleChange}
-<<<<<<< HEAD
                 pattern='[0-9]{10}' // Basic validation for 10-digit mobile number
                 title='Please enter a valid 10-digit mobile number.'
                 className='w-full pl-0 pr-4 py-2 border-b-2 border-[#DEE2E6] focus:outline-none focus:ring-0 focus:border-blue-500 placeholder-[#495057] placeholder:font-medium'
                 placeholder='Mobile Number (10 digits)'
-=======
-                className='w-full pl-0 pr-4 py-2 border-b-2 border-[#DEE2E6] focus:outline-none focus:ring-0 focus:border-blue-500 placeholder-[#495057] placeholder:font-medium'
-                placeholder='Mobile Number'
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
                 required
               />
             </div>
@@ -297,27 +226,17 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className='w-full pl-0 pr-4 py-2 border-b-2 border-[#DEE2E6] focus:outline-none focus:ring-0 focus:border-blue-500 placeholder-[#495057] placeholder:font-medium'
-<<<<<<< HEAD
                 placeholder='Password (Min 6 characters)'
                 required
                 minLength={6}
-=======
-                placeholder='Password'
-                required
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
               />
             </div>
             <button
               type='submit'
               className='w-full bg-blue-primary text-white py-3 md:py-2 px-4 font-semibold rounded-lg hover:bg-[#053748] transition-colors'
-<<<<<<< HEAD
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Creating Account...' : 'Create Account'}
-=======
-            >
-              Create Account
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
             </button>
           </form>
 

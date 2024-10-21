@@ -26,10 +26,7 @@ import ConfirmationPage from './Components/Dashboard/ConfirmationPage';
 import Setting from './Components/Setting';
 import Termandcondition from './Components/Termandcondition';
 import SideBar from './Components/SideBar';
-<<<<<<< HEAD
-=======
 import ScrollToTop from './Components/ScrollToTop';
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
 
 // Import ProtectedRoute
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -37,10 +34,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 function App() {
   return (
     <Router>
-<<<<<<< HEAD
-=======
-      <ScrollToTop />
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
+      <ScrollToTop/>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -60,13 +54,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="selectbank" element={<SelectBankAcc />} />
-<<<<<<< HEAD
                   <Route path="selectbank/leaddetails" element={<LeadDetails />} />
                   <Route path="selectbank/leaddetails/confirmation" element={<ConfirmationPage />} />
-=======
-                  <Route path="leaddetails" element={<LeadDetails />} />
-                  <Route path="confirmation" element={<ConfirmationPage />} />
->>>>>>> c7b04dd54cfade69b83121d995af012e86f783b2
                   {/* Add more nested dashboard routes here */}
                 </Routes>
               </AuthLayout>
