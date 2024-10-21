@@ -2,7 +2,7 @@ import React from 'react';
 
 const Paymentdetails = () => {
   return (
-    <div className=' w-[95%] m-auto mt-5'>
+    <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
       <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Payment details</h1>
       
       {/* Input Fields */}

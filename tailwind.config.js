@@ -13,7 +13,7 @@ export default {
         'outer-space': '#495057',
         'french-grey': '#ADB5BD',
         'platinum': '#DEE2E6',
-        'white': '#FFFFFF',
+        'white_custom': '#FFFFFF',
       },
     },
   },

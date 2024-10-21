@@ -2,7 +2,7 @@ import React from 'react';
 
 const Support = () => {
     return (
-        <div className='w-[95%] m-auto mt-5'>
+        <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
             <h1 className="text-xl font-medium text-[#063E50] mb-4">Get in Touch with Us.</h1>
 
             {/* Contact Sections */}

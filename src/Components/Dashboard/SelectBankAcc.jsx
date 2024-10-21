@@ -37,7 +37,7 @@ const SelectBankAcc = () => {
     ];
 
     return (
-        <div className=' w-[95%] m-auto my-5'>
+        <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
             <div className="flex items-center py-4 w-1/1">
                 <div className=' flex gap-3 '>
                     <div>
@@ -55,7 +55,7 @@ const SelectBankAcc = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {bankData.map((bank) => (
-                    <div key={bank.id} className='border border-[#DEE2E6] rounded-3xl'>
+                    <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl'>
                         <div className="flex items-center px-4 pl-8 py-4">
                             <img src={bank.icon} alt={`${bank.title} Icon`} className="w-16 h-16 mr-4" />
                             <div>

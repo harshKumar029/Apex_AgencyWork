@@ -87,7 +87,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='w-[95%] m-auto my-5'>
+    <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
 
       {/* Row of Cards */}
       <div className="flex flex-col sm:flex-row sm:space-x-4 mb-6">
@@ -110,7 +110,7 @@ const Dashboard = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="flex items-center border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
+          <div className="flex items-center border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
             <div>
               <h2 className="text-[#232323] font-semibold text-base">Your Offer Letter</h2>
               <p className="text-[#063E50] font-normal underline text-xs">Download</p>
@@ -118,7 +118,7 @@ const Dashboard = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="flex items-center border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
+          <div className="flex items-center border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
             <div>
               <h2 className="text-[#232323] font-semibold text-base">Your ID Card</h2>
               <p className="text-[#063E50] font-normal underline text-xs">Download</p>
@@ -139,7 +139,7 @@ const Dashboard = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {cardData.map((card) => (
-            <div key={card.id} className='border border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'>
+            <div key={card.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'>
               <div className="flex items-center p-4">
                 <img src={card.icon} alt={`${card.title} Icon`} className="w-16 h-16 mr-4" />
                 <div>

@@ -1,9 +1,5 @@
   import React from 'react';
   import { useNavigate } from 'react-router-dom';
-  import DashboardIcon from "../assets/icon/SidebarIcon/Dashboard.svg";
-  import MyLevel from "../assets/icon/SidebarIcon/MyLevel.svg";
-  import Leads from "../assets/icon/SidebarIcon/Leads.svg";
-  import Earning from "../assets/icon/SidebarIcon/Earning.svg";
   
   const BottomNavigationBar = () => {
       const navigate = useNavigate();

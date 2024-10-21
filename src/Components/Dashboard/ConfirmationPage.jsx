@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const ConfirmationPage = () => {
   const navigate = useNavigate();
   return (
-    <div className='w-[95%] m-auto my-5'>
+    <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
       <div className="flex items-center py-4 w-1/1">
         <div className=' flex gap-3 '>
           <div>

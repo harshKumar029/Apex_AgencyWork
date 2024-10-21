@@ -2,7 +2,7 @@ import React from 'react'
 
 const Termandcondition = () => {
     return (
-        <div className='w-[95%] m-auto my-5'>
+        <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
             <p>
 
                 <h2 className="text-xl font-semibold mb-2">1. INTRODUCTION</h2>

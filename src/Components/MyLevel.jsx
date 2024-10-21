@@ -7,7 +7,7 @@ const MyLevel = () => {
     const handleChange = (e) => setValue(e.target.value);
 
     return (
-        <div className=' w-[95%] m-auto mt-5'>
+        <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
             <h1 className="text-2xl font-medium text-[#343C6A] mb-4">My Level</h1>
 
             {/* Row of Cards */}
@@ -80,7 +80,7 @@ const MyLevel = () => {
             {/* Column of Cards */}
             <div className="grid grid-cols-1 gap-4">
                 {/* Card 1 */}
-                <div className="border border-[#DEE2E6] rounded-3xl p-4 space-y-5">
+                <div className="border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 space-y-5">
                     <h2 className="text-[#063E50] font-bold text-xl">Platinum</h2>
                     <p className="text-[#063E50] flex items-center gap-3 font-semibold text-lg">Completed
                         <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +92,7 @@ const MyLevel = () => {
                 </div>
 
                 {/* Card 2 */}
-                <div className="border border-[#DEE2E6] rounded-3xl p-4 space-y-5">
+                <div className="border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 space-y-5">
                     <h2 className="text-[#063E50] font-bold text-xl">Gold</h2>
                     <p className="text-[#063E50] flex items-center gap-3 font-semibold text-xl">Completed
                         <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +104,7 @@ const MyLevel = () => {
                 </div>
 
                 {/* Card 3 */}
-                <div className="border border-[#DEE2E6] rounded-3xl p-4 space-y-5">
+                <div className="border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 space-y-5">
                     <h2 className="text-[#063E50] font-bold text-xl">Silver</h2>
                     <p className="text-[#063E50] flex items-center gap-3 font-semibold text-xl">Completed
                         <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
