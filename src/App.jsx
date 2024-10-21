@@ -36,7 +36,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop/>
-      <BottomNavigationBar/>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -52,6 +51,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Dashboard" />
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
@@ -72,6 +72,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="My Leads" />
                 <MyLeads />
               </AuthLayout>
@@ -84,6 +85,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Payment Detail" />
                 <Paymentdetails />
               </AuthLayout>
@@ -96,6 +98,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Earnings" />
                 <Earnings />
               </AuthLayout>
@@ -108,6 +111,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Training" />
                 <Trainings />
               </AuthLayout>
@@ -120,6 +124,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Documents" />
                 <Mydocument />
               </AuthLayout>
@@ -132,6 +137,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Support" />
                 <Support />
               </AuthLayout>
@@ -144,6 +150,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="My Level" />
                 <MyLevel />
               </AuthLayout>
@@ -156,6 +163,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Settings" />
                 <Setting />
               </AuthLayout>
@@ -168,6 +176,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
+                <BottomNavigationBar/>
                 <Header title="Terms & Conditions" />
                 <Termandcondition />
               </AuthLayout>

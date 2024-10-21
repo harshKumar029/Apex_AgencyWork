@@ -15,7 +15,7 @@
       ];
   
       return (
-          <div className="fixed top-auto left-0  w-full rounded-t-3xl bg-[#fefefe] shadow-2xl shadow-black flex justify-around items-center py-5" >
+          <div className="fixed z-20 top-auto left-0 sm:hidden  w-full rounded-t-3xl bg-[#fefefe] shadow-2xl shadow-black flex justify-around items-center py-5" >
               {navItems.map((item) => (
                   <div key={item.name} className="flex flex-col items-center"
                       onClick={() => navigate(item.path)}
