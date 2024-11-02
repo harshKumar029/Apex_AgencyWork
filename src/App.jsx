@@ -27,7 +27,9 @@ import Setting from './Components/Setting';
 import Termandcondition from './Components/Termandcondition';
 import SideBar from './Components/SideBar';
 import ScrollToTop from './Components/ScrollToTop';
-import BottomNavigationBar from './Components/BottomNavigationBar'
+import BottomNavigationBar from './Components/BottomNavigationBar';
+import { auth, db, storage } from './firebase';
+import ImportData from './ImportData';
 
 // Import ProtectedRoute
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -35,7 +37,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 function App() {
   return (
     <Router>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -51,13 +53,44 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
-                <Header title="Dashboard" />
+                <BottomNavigationBar />
                 <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="selectbank" element={<SelectBankAcc />} />
-                  <Route path="selectbank/leaddetails" element={<LeadDetails />} />
-                  <Route path="selectbank/leaddetails/confirmation" element={<ConfirmationPage />} />
+                  <Route
+                    path="/"
+                    element={
+                      <>
+                        <Header title="Dashboard" />
+                        <Dashboard />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="selectbank/:serviceId"
+                    element={
+                      <>
+                        <Header title="Select Bank" />
+                        <SelectBankAcc />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="selectbank/:serviceId/leaddetails/:bankId"
+                    element={
+                      <>
+                        <Header title="Lead Details" />
+                        <LeadDetails />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="selectbank/:serviceId/leaddetails/confirmation"
+                    element={
+                      <>
+                        <Header title="Confirmation" />
+                        <ConfirmationPage />
+                      </>
+                    }
+                  />
                   {/* Add more nested dashboard routes here */}
                 </Routes>
               </AuthLayout>
@@ -72,7 +105,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="My Leads" />
                 <MyLeads />
               </AuthLayout>
@@ -85,7 +118,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Payment Detail" />
                 <Paymentdetails />
               </AuthLayout>
@@ -98,7 +131,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Earnings" />
                 <Earnings />
               </AuthLayout>
@@ -111,7 +144,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Training" />
                 <Trainings />
               </AuthLayout>
@@ -124,7 +157,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Documents" />
                 <Mydocument />
               </AuthLayout>
@@ -137,7 +170,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Support" />
                 <Support />
               </AuthLayout>
@@ -150,7 +183,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="My Level" />
                 <MyLevel />
               </AuthLayout>
@@ -163,7 +196,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Settings" />
                 <Setting />
               </AuthLayout>
@@ -176,7 +209,7 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <SideBar />
-                <BottomNavigationBar/>
+                <BottomNavigationBar />
                 <Header title="Terms & Conditions" />
                 <Termandcondition />
               </AuthLayout>

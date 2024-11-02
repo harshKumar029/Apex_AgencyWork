@@ -1,38 +1,46 @@
 // src/hooks/useUserData.js
 
 import { useState, useEffect } from 'react';
-import { auth, db } from '../firebase';
+import { auth, db } from '../firebase'; // Adjust the import paths as needed
 import { doc, getDoc } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
 
 const useUserData = () => {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
+        const fetchUserData = async () => {
+            try {
+                const user = auth.currentUser;
+                if (user) {
                     const userDocRef = doc(db, 'users', user.uid);
                     const userDoc = await getDoc(userDocRef);
 
+                    let data = {};
                     if (userDoc.exists()) {
-                        setUserData(userDoc.data());
-                    } else {
-                        setError('No user data found.');
+                        data = userDoc.data();
                     }
-                } catch (err) {
-                    console.error('Error fetching user data:', err);
-                    setError('Failed to fetch user data.');
-                }
-            } else {
-                setError('No user is logged in.');
-            }
-            setLoading(false);
-        });
 
-        return () => unsubscribe();
+                    // Fetch profile details from subcollection
+                    const profileDocRef = doc(db, 'users', user.uid, 'Details&Documents', 'ProfileDetails');
+                    const profileDoc = await getDoc(profileDocRef);
+
+                    if (profileDoc.exists()) {
+                        data = { ...data, ...profileDoc.data() };
+                    }
+
+                    setUserData(data);
+                }
+            } catch (err) {
+                console.error('Error fetching user data:', err);
+                setError('Failed to fetch user data.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
     }, []);
 
     return { userData, loading, error };

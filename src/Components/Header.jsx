@@ -1,24 +1,24 @@
 // src/Components/Header.jsx
 
 import React, { useRef, useEffect } from 'react';
-import Userimg from "../assets/img/Userimg.svg";
+import placeholderImage from "../assets/icon/profile-img.svg"; // Import placeholder image
 import Searchbar from './Searchbar';
 import { useSidebar } from '../ContextApi';
 import { Link } from 'react-router-dom';
-import useUserData from '../hooks/useUserData'; // Import the custom hook
+import useUserData from '../hooks/useUserData'; // Ensure this hook is correctly implemented and imported
 
 const Header = ({ title, showSearch = true, children }) => {
     const { isOpenProfile, setIsOpenProfile, setIsOpen } = useSidebar();
-    const ProfileRef = useRef(null);
+    const profileRef = useRef(null);
 
-    const { userData, loading, error } = useUserData(); // Use the custom hook
+    const { userData, loading, error } = useUserData(); // Fetch user data
 
     const toggleDropdown = () => {
         setIsOpenProfile(!isOpenProfile);
     };
 
     const handleCopyUID = () => {
-        const uidText = document.querySelector('.uid-text').textContent;
+        const uidText = userData.uniqueID;
         navigator.clipboard.writeText(uidText)
             .then(() => {
                 alert('UID copied to clipboard!');
@@ -29,7 +29,7 @@ const Header = ({ title, showSearch = true, children }) => {
     };
 
     const handleClickOutside = (event) => {
-        if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
+        if (profileRef.current && !profileRef.current.contains(event.target)) {
             setIsOpenProfile(false);
         }
     };
@@ -41,17 +41,12 @@ const Header = ({ title, showSearch = true, children }) => {
         };
     }, []);
 
-    // Handle loading and error states
-    if (loading) {
-        return <div className="p-4">Loading...</div>;
-    }
-
     if (error) {
         return <div className="p-4 text-red-500">Error: {error}</div>;
     }
 
     return (
-        <div ref={ProfileRef}>
+        <div ref={profileRef}>
             <div className="flex items-center justify-between p-4 sm:px-8 bg-white border-b border-[#DEE2E6]">
                 {/* Hamburger Menu for Mobile */}
                 <button className="md:hidden" onClick={() => { setIsOpen(prev => !prev); setIsOpenProfile(false); }}>
@@ -63,7 +58,7 @@ const Header = ({ title, showSearch = true, children }) => {
                 {/* Page Title */}
                 <h1 className="text-2xl sm:text-3xl text-[#343C6A] font-semibold">{title}</h1>
 
-                {/* Right Section (Search, Settings, Notification, Profile) */}
+                {/* Right Section (Search, Earning Icon, Profile) */}
                 <div className="flex items-center sm:space-x-10">
                     {/* Search Input */}
                     <div className='hidden sm:block'>
@@ -80,19 +75,19 @@ const Header = ({ title, showSearch = true, children }) => {
                     {/* Profile Dropdown */}
                     <div className="relative">
                         <img
-                            src={Userimg}
+                            src={userData.profilePhotoURL || placeholderImage}
                             alt="Profile"
                             onClick={toggleDropdown}
                             className="w-12 h-12 rounded-full object-cover cursor-pointer"
                         />
                         {isOpenProfile && (
-                            <div onClick={toggleDropdown} className="absolute right-0 z-50 mt-3 w-72 bg-white border border-gray-200 rounded-lg shadow-lg">
+                            <div className="absolute right-0 z-50 mt-3 w-72 bg-white border border-gray-200 rounded-lg shadow-lg">
                                 <ul>
                                     {/* Fullname and UID */}
-                                    <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex items-center">
+                                    <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex items-start">
                                         {/* User Icon */}
                                         <svg
-                                            className="w-5 h-5 text-gray-600 mr-3"
+                                            className="w-5 h-5 text-gray-600 mr-3 flex-shrink-0"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -100,7 +95,7 @@ const Header = ({ title, showSearch = true, children }) => {
                                         >
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A4 4 0 015 14V8a4 4 0 014-4h6a4 4 0 014 4v6a4 4 0 01-.121 3.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
-                                        <div>
+                                        <div className="flex-1 min-w-0">
                                             <span className="font-semibold">{userData.fullname}</span>
                                             <p className="text-xs text-gray-600 flex items-center">
                                                 UID:
@@ -118,11 +113,12 @@ const Header = ({ title, showSearch = true, children }) => {
                                             </p>
                                         </div>
                                     </li>
+
                                     {/* Mobile Number */}
                                     <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex items-center">
                                         {/* Phone Icon */}
                                         <svg
-                                            className="w-5 h-5 text-gray-600 mr-3"
+                                            className="w-5 h-5 text-gray-600 mr-3 flex-shrink-0"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -133,11 +129,12 @@ const Header = ({ title, showSearch = true, children }) => {
                                         </svg>
                                         <span>{userData.mobile}</span>
                                     </li>
+
                                     {/* Email Address */}
                                     <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex items-center">
                                         {/* Email Icon */}
                                         <svg
-                                            className="w-5 h-5 text-gray-600 mr-3"
+                                            className="w-5 h-5 text-gray-600 mr-3 flex-shrink-0"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -145,14 +142,15 @@ const Header = ({ title, showSearch = true, children }) => {
                                         >
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                         </svg>
-                                        <span className="truncate max-w-xs">{userData.email}</span>
+                                        <span className="truncate">{userData.email}</span>
                                     </li>
+
                                     {/* Go to Apex Dashboard */}
-                                    <Link to='/' >
+                                    <Link to='/'>
                                         <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex items-center">
                                             {/* Dashboard Icon */}
                                             <svg
-                                                className='w-5 h-5 text-gray-600 mr-3'
+                                                className='w-5 h-5 text-gray-600 mr-3 flex-shrink-0'
                                                 viewBox="0 0 24 24"
                                                 fill="none"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -162,19 +160,22 @@ const Header = ({ title, showSearch = true, children }) => {
                                             Go to Apex Dashboard
                                         </li>
                                     </Link>
-                                    {/* Logged In As */}
-                                    <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer bg-[#eaeaea] flex items-center">
-                                        {/* User Icon */}
-                                        <svg
-                                            className="w-5 h-5 text-gray-600 mr-3"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A4 4 0 015 14V8a4 4 0 014-4h6a4 4 0 014 4v6a4 4 0 01-.121 3.804M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" />
-                                        </svg>
-                                        <span>Logged In as {userData.email}</span>
+
+                                    {/* Logged In As (No Icon) */}
+                                    <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer bg-[#eaeaea]">
+                                        <div className="flex items-start overflow-hidden">
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-sm text-gray-700">
+                                                    Logged In as{' '}
+                                                    <span
+                                                        className="text-[#063E50] underline block truncate"
+                                                        title={userData.email}
+                                                    >
+                                                        {userData.email}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -182,6 +183,7 @@ const Header = ({ title, showSearch = true, children }) => {
                     </div>
                 </div>
             </div>
+
             <main>
                 {children}
             </main>
