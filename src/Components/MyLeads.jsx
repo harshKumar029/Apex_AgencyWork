@@ -170,32 +170,10 @@ const MyLeads = () => {
         <Searchbar />
       </div>
       {/* Header */}
-      <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Active Leads</h1>
+      <div className=" flex justify-between items-center  mb-4">
+        <h1 className="text-2xl font-medium text-[#343C6A]">Active Leads</h1>
 
-      {/* Buttons for filtering the table */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-        <div className="w-full sm:w-auto">
-          <div className="space-x-4 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            {['All', 'Brand', 'Fulfill', 'Pending', 'Rejected', 'Expire'].map((filter) => (
-              <button
-                key={filter}
-                onClick={() => {
-                  setActiveFilter(filter);
-                  setCurrentPage(1);
-                }}
-                className={`py-2 px-4 rounded-full ${
-                  activeFilter === filter
-                    ? 'bg-[#063E50] text-white'
-                    : ' border border-[#063E50] text-[#063E50]'
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <button className="py-2 px-3 mt-5 sm:mt-auto sm:border border-[#063E50] flex self-end sm:self-auto gap-2 text-[#063E50] rounded-full">
+        <button className="py-2 px-3 sm:mt-auto sm: sm:border border-[#063E50] flex self-end sm:self-auto gap-2 text-[#063E50] rounded-full">
           <svg
             className="w-6 h-6 text-[#063E50]"
             aria-hidden="true"
@@ -215,6 +193,31 @@ const MyLeads = () => {
           </svg>
           Download Report
         </button>
+      </div>
+
+      {/* Buttons for filtering the table */}
+      <div className=" justify-between items-center mb-4">
+        <div className="w-full sm:w-auto">
+          <div className="space-x-4 overflow-x-auto whitespace-nowrap hide-scrollbar">
+            {['All', 'Brand', 'Fulfill', 'Pending', 'Rejected', 'Expire'].map((filter) => (
+              <button
+                key={filter}
+                onClick={() => {
+                  setActiveFilter(filter);
+                  setCurrentPage(1);
+                }}
+                className={`py-2 px-4 rounded-full ${activeFilter === filter
+                    ? 'bg-[#063E50] text-white'
+                    : ' border border-[#063E50] text-[#063E50]'
+                  }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+
       </div>
 
       <div className="overflow-x-auto sm:hidden">
@@ -306,11 +309,10 @@ const MyLeads = () => {
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className={`py-2 px-4 flex items-center font-medium ${
-            currentPage === 1
+          className={`py-2 px-4 flex items-center font-medium ${currentPage === 1
               ? ' text-gray-500 cursor-not-allowed'
               : ' text-[#063E50]'
-          } rounded`}
+            } rounded`}
         >
           <svg
             className="w-5 h-5 "
@@ -337,11 +339,10 @@ const MyLeads = () => {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`py-2 px-4 mx-1 rounded-lg ${
-              currentPage === index + 1
+            className={`py-2 px-4 mx-1 rounded-lg ${currentPage === index + 1
                 ? 'bg-[#063E50] text-white'
                 : ' text-[#063E50]'
-            }`}
+              }`}
           >
             {index + 1}
           </button>
@@ -350,11 +351,10 @@ const MyLeads = () => {
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className={`py-2 px-4 flex items-center font-medium ${
-            currentPage === totalPages
+          className={`py-2 px-4 flex items-center font-medium ${currentPage === totalPages
               ? ' text-gray-500 cursor-not-allowed'
               : ' text-[#063E50]'
-          } rounded`}
+            } rounded`}
         >
           Next
           <svg
