@@ -126,12 +126,11 @@ const SideBar = () => {
               </button>
             </div>
           </div>
-
-          <div className="mt-auto">
-            <hr className='border-t border-[#ADB5BD] mb-1' />
-            <div className="w-fit mx-auto space-y-4 py-2">
-              <p className="font-medium text-sm">Apex. All rights reserved</p>
-            </div>
+        <div className="mt-auto hidden lg:block">
+          <hr className='border-t border-[#ADB5BD] mb-1' />
+          <div className="w-fit mx-auto space-y-4 py-2">
+          <p className="font-medium text-sm">Apex. All rights reserved</p>
+        </div>
           </div>
         </div>
       </div>

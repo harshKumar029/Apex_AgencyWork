@@ -107,7 +107,7 @@ const SelectBankAcc = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {availableBanks.map((bank) => (
-          <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl'>
+          <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'>
             <div className="flex items-center px-4 pl-8 py-4">
               <img src={bank.icon} alt={`${bank.title} Icon`} className="w-16 h-16 mr-4" />
               <div>

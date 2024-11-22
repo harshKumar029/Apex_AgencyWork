@@ -75,7 +75,11 @@ const Paymentdetails = () => {
   };
 
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
+      </div>
+    );
   }
 
   return (

@@ -6,7 +6,7 @@ import {
   getDoc,
   setDoc,
 } from 'firebase/firestore';
-import { auth, db, storage } from '../firebase'; // Ensure storage is imported
+import { auth, db, storage } from '../firebase';
 import {
   updatePassword,
   reauthenticateWithCredential,
@@ -22,11 +22,14 @@ import {
 // Import the placeholder image
 import placeholderImage from '../assets/icon/profile-img.svg';
 
+// Import the compression utility
+import { compressImage } from '../utils/compressImage';
+
 const Setting = () => {
   const [activeTab, setActiveTab] = useState('editProfile');
   const [formData, setFormData] = useState({
     fullname: '',
-    mobileNumber: '', // Now from 'mobile' field in users/{userId}
+    mobileNumber: '',
     email: '',
     dob: '',
     address: '',
@@ -37,8 +40,8 @@ const Setting = () => {
     workExperience: '',
     profilePhotoURL: '',
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Changed from 'loading'
+  // Removed 'error' state
 
   // State variables for profile update messages
   const [profileSuccess, setProfileSuccess] = useState('');
@@ -54,6 +57,10 @@ const Setting = () => {
   // State for handling profile photo upload
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
+  // State for handling form submissions
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
+  const [isSavingPassword, setIsSavingPassword] = useState(false);
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     // Clear messages when switching tabs
@@ -63,8 +70,10 @@ const Setting = () => {
     setPasswordSuccess('');
   };
 
-  // Fetch user data from Firestore
+  // Fetch user data from Firestore with retry mechanism
   useEffect(() => {
+    let isMounted = true; // To prevent setting state on unmounted component
+
     const fetchUserData = async () => {
       try {
         const user = auth.currentUser;
@@ -87,27 +96,42 @@ const Setting = () => {
 
           if (profileDoc.exists()) {
             const profileData = profileDoc.data();
-            setFormData({
-              ...formData,
-              ...userData,
-              ...profileData,
-            });
+            if (isMounted) {
+              setFormData({
+                ...formData,
+                ...userData,
+                ...profileData,
+              });
+              setIsLoading(false);
+            }
           } else {
-            setFormData({
-              ...formData,
-              ...userData,
-            });
+            if (isMounted) {
+              setFormData({
+                ...formData,
+                ...userData,
+              });
+              setIsLoading(false);
+            }
           }
+        } else {
+          console.warn('No authenticated user found!');
+          // Redirect to login if user is not authenticated
+          window.location.href = '/login'; // Alternatively, use navigate if using react-router
         }
       } catch (err) {
         console.error('Error fetching user data:', err);
-        setError('Failed to load user data.');
-      } finally {
-        setLoading(false);
+        if (isMounted) {
+          // Retry after 3 seconds
+          setTimeout(fetchUserData, 3000);
+        }
       }
     };
 
     fetchUserData();
+
+    return () => {
+      isMounted = false; // Cleanup flag
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -120,6 +144,7 @@ const Setting = () => {
     e.preventDefault();
     setProfileError('');
     setProfileSuccess('');
+    setIsSavingProfile(true);
     try {
       const user = auth.currentUser;
       if (user) {
@@ -150,6 +175,8 @@ const Setting = () => {
     } catch (err) {
       console.error('Error updating profile:', err);
       setProfileError('Failed to update profile.');
+    } finally {
+      setIsSavingProfile(false);
     }
   };
 
@@ -157,9 +184,11 @@ const Setting = () => {
     e.preventDefault();
     setPasswordError('');
     setPasswordSuccess('');
+    setIsSavingPassword(true);
 
     if (newPassword !== confirmPassword) {
       setPasswordError('New passwords do not match.');
+      setIsSavingPassword(false);
       return;
     }
 
@@ -190,6 +219,8 @@ const Setting = () => {
       } else {
         setPasswordError('Failed to change password.');
       }
+    } finally {
+      setIsSavingPassword(false);
     }
   };
 
@@ -208,13 +239,16 @@ const Setting = () => {
       const storagePath = `users/${user.uid}/ProfilePhoto/profilePhoto`;
       const storageRef = ref(storage, storagePath);
 
+      // Compress the image before uploading
+      const compressedFile = await compressImage(file, 150); // Compress to 150KB
+
       // Delete the old profile photo if it exists
       await deleteObject(storageRef).catch((error) => {
         // It's okay if the file doesn't exist
         console.error('Error deleting old profile photo:', error);
       });
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const uploadTask = uploadBytesResumable(storageRef, compressedFile);
 
       uploadTask.on(
         'state_changed',
@@ -255,12 +289,12 @@ const Setting = () => {
     }
   };
 
-  if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
+  if (isLoading) {
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
+      </div>
+    );
   }
 
   return (
@@ -555,9 +589,38 @@ const Setting = () => {
             <div className="flex justify-center sm:justify-end mt-8">
               <button
                 type="submit"
-                className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95"
+                className={`bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center ${
+                  isSavingProfile ? 'cursor-not-allowed opacity-50' : ''
+                }`}
+                disabled={isSavingProfile}
               >
-                Save
+                {isSavingProfile ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 mr-3 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      ></path>
+                    </svg>
+                    Saving...
+                  </>
+                ) : (
+                  'Save'
+                )}
               </button>
             </div>
           </form>
@@ -585,7 +648,7 @@ const Setting = () => {
           {/* Save Button */}
           <div className="flex justify-center sm:justify-end mt-8">
             <button
-              className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95"
+              className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center"
             >
               Save
             </button>
@@ -711,9 +774,38 @@ const Setting = () => {
               <div className="flex justify-center sm:justify-end mt-8">
                 <button
                   type="submit"
-                  className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95"
+                  className={`bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center ${
+                    isSavingPassword ? 'cursor-not-allowed opacity-50' : ''
+                  }`}
+                  disabled={isSavingPassword}
                 >
-                  Save
+                  {isSavingPassword ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5 mr-3 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
+                      </svg>
+                      Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
                 </button>
               </div>
             </form>

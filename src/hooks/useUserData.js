@@ -1,16 +1,19 @@
 // src/hooks/useUserData.js
 
 import { useState, useEffect } from 'react';
-import { auth, db } from '../firebase'; // Adjust the import paths as needed
+import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-const useUserData = () => {
+const useUserData = (retryCount) => {
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
+            setLoading(true);
+            setError(null); // Reset error before fetching
+
             try {
                 const user = auth.currentUser;
                 if (user) {
@@ -23,7 +26,13 @@ const useUserData = () => {
                     }
 
                     // Fetch profile details from subcollection
-                    const profileDocRef = doc(db, 'users', user.uid, 'Details&Documents', 'ProfileDetails');
+                    const profileDocRef = doc(
+                        db,
+                        'users',
+                        user.uid,
+                        'Details&Documents',
+                        'ProfileDetails'
+                    );
                     const profileDoc = await getDoc(profileDocRef);
 
                     if (profileDoc.exists()) {
@@ -31,6 +40,8 @@ const useUserData = () => {
                     }
 
                     setUserData(data);
+                } else {
+                    throw new Error('User not authenticated.');
                 }
             } catch (err) {
                 console.error('Error fetching user data:', err);
@@ -41,7 +52,7 @@ const useUserData = () => {
         };
 
         fetchUserData();
-    }, []);
+    }, [retryCount]); // Include retryCount in dependency array
 
     return { userData, loading, error };
 };

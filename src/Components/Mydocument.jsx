@@ -1,5 +1,7 @@
+// src/Components/Mydocument.jsx
+
 import React, { useRef, useState, useEffect } from 'react';
-import { auth, db, storage } from '../firebase'; // Ensure storage is imported
+import { auth, db, storage } from '../firebase';
 import {
   ref,
   uploadBytesResumable,
@@ -7,6 +9,9 @@ import {
   deleteObject,
 } from 'firebase/storage';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+
+// Import the compression utility
+import { compressImage } from '../utils/compressImage';
 
 const Mydocument = () => {
   const [aadhaarFrontFile, setAadhaarFrontFile] = useState(null);
@@ -121,6 +126,9 @@ const Mydocument = () => {
       const uploadPromises = filesToUpload.map(
         async ({ file, name, fileName, oldFileName, setOldFileName }) => {
           if (file) {
+            // Compress the image before uploading
+            const compressedFile = await compressImage(file, 150); // Compress to 150KB
+
             // Before uploading the new file, delete the existing file if it exists
             if (oldFileName) {
               const oldFileRef = ref(
@@ -135,9 +143,9 @@ const Mydocument = () => {
             // Proceed to upload the new file
             const storageRef = ref(
               storage,
-              `users/${user.uid}/Documents/${name}/${file.name}`
+              `users/${user.uid}/Documents/${name}/${compressedFile.name}`
             );
-            const uploadTask = uploadBytesResumable(storageRef, file);
+            const uploadTask = uploadBytesResumable(storageRef, compressedFile);
 
             return new Promise((resolve, reject) => {
               uploadTask.on(
@@ -145,7 +153,13 @@ const Mydocument = () => {
                 (snapshot) => {
                   const progress =
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                  setUploadProgress(progress);
+                  setUploadProgress((prevProgress) => {
+                    // Calculate the average progress across all uploads
+                    const totalFiles = filesToUpload.filter((f) => f.file).length;
+                    const newProgress =
+                      (prevProgress * (totalFiles - 1) + progress) / totalFiles;
+                    return newProgress;
+                  });
                 },
                 (error) => {
                   console.error(`Error uploading ${name}:`, error);
@@ -153,11 +167,12 @@ const Mydocument = () => {
                 },
                 async () => {
                   const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
                   // Update the old file name to the new one
-                  setOldFileName(file.name);
+                  setOldFileName(compressedFile.name);
                   resolve({
                     [`${name}`]: downloadURL,
-                    [`${name}Name`]: file.name,
+                    [`${name}Name`]: compressedFile.name,
                   });
                 }
               );
@@ -266,7 +281,16 @@ const Mydocument = () => {
                 onClick={() => aadhaarFrontRef.current.click()}
               >
                 {/* Icon here */}
-                {/* ... SVG icon ... */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
               </span>
             </div>
           </div>
@@ -301,7 +325,16 @@ const Mydocument = () => {
                 onClick={() => aadhaarBackRef.current.click()}
               >
                 {/* Icon here */}
-                {/* ... SVG icon ... */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
               </span>
             </div>
           </div>
@@ -337,7 +370,16 @@ const Mydocument = () => {
                 onClick={() => passportPhotoRef.current.click()}
               >
                 {/* Icon here */}
-                {/* ... SVG icon ... */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
               </span>
             </div>
           </div>

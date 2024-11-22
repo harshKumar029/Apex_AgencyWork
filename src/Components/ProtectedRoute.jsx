@@ -20,9 +20,9 @@ const ProtectedRoute = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="bg-light-dashboard-gray h-screen flex justify-center items-center">
-        <p>Loading...</p>
-      </div>
+    <div className="bg-light-dashboard-gray h-screen flex justify-center items-center">
+      <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
+    </div>
     );
   }
 

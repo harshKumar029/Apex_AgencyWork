@@ -75,7 +75,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className='flex justify-center items-center h-full'>
-        <p>Loading...</p>
+        <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
       </div>
     );
   }
@@ -91,43 +91,39 @@ const Dashboard = () => {
   return (
     <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
 
-      {/* Welcome and Info Cards */}
-      <div className="flex flex-col sm:flex-row sm:space-x-4 mb-6">
-        {/* Welcome Card */}
-        <div className="flex flex-col items-center sm:items-start sm:flex-grow py-4 w-full justify-center sm:w-auto">
-          <div>
-            <h2 className="text-[#232323] font-semibold text-3xl">Welcome {fullName}!</h2>
-            <p className="text-[#ADB5BD] font-normal text-xl">Explore our all features and services.</p>
-          </div>
-        </div>
+{/* Welcome and Info Cards */}
+<div className="flex flex-col sm:flex-row sm:space-x-4 mb-6">
+  {/* Welcome Card */}
+  <div className="flex flex-col items-center sm:items-start sm:flex-grow py-4 w-full justify-center sm:w-auto">
+    <div>
+      <h4 className="text-[#232323] font-semibold text-2xl">Welcome {fullName}!</h4>
+      <p className="text-[#ADB5BD] font-normal text-xl">Explore our all features and services.</p>
+    </div>
+  </div>
 
-        {/* Info Cards Container */}
-        <div className="flex flex-col sm:flex-row sm:space-x-10 space-y-4 sm:space-y-0">
-          {/* Unique ID Card */}
-          <div className="flex items-center border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
-            <div>
-              <h2 className="text-[#232323] font-semibold text-base">Your Unique ID</h2>
-              <p className="text-[#063E50] font-normal underline text-xs">{uniqueID}</p>
-            </div>
-          </div>
-
-          {/* Offer Letter Card */}
-          <div className="flex items-center border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
-            <div>
-              <h2 className="text-[#232323] font-semibold text-base">Your Offer Letter</h2>
-              <p className="text-[#063E50] font-normal underline text-xs">Download</p>
-            </div>
-          </div>
-
-          {/* ID Card */}
-          <div className="flex items-center border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
-            <div>
-              <h2 className="text-[#232323] font-semibold text-base">Your ID Card</h2>
-              <p className="text-[#063E50] font-normal underline text-xs">Download</p>
-            </div>
-          </div>
-        </div>
+  {/* Info Cards Container */}
+  <div className="flex flex-row space-x-4 sm:space-x-10">
+    {/* Offer Letter Card */}
+    <div className="flex items-center border bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg border-[#DEE2E6] rounded-3xl p-6 w-1/2 sm:w-auto transform transition-transform hover:scale-105">
+      <div className="flex flex-col items-center text-center w-full">
+        <h2 className="text-white font-semibold text-2x1 mb-2">Your Offer Letter</h2>
+        <button className="bg-white text-blue-600 font-medium py-2 px-4 rounded-full shadow-md hover:bg-blue-100 transition-all duration-200 ease-in-out">
+          Download
+        </button>
       </div>
+    </div>
+
+    {/* ID Card */}
+    <div className="flex items-center border bg-gradient-to-r from-green-400 to-teal-500 shadow-lg border-[#DEE2E6] rounded-3xl p-6 w-1/2 sm:w-auto transform transition-transform hover:scale-105">
+      <div className="flex flex-col items-center text-center w-full">
+        <h2 className="text-white font-semibold text-2x1 mb-2">Your ID Card</h2>
+        <button className="bg-white text-green-600 font-medium py-2 px-4 rounded-full shadow-md hover:bg-green-100 transition-all duration-200 ease-in-out">
+          Download
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* Services Section */}
       <div>
