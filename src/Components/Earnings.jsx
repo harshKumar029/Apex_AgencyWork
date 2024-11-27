@@ -315,7 +315,7 @@ const Earnings = () => {
       {/* Withdraw Amount Button */}
       <div className="flex justify-center">
         <button
-          className={`py-2 px-4 rounded-full text-white flex items-center justify-center ${
+          className={`py-2 px-4 rounded-full w-full sm:w-auto text-white flex items-center justify-center ${
             isWithdrawButtonDisabled
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-[#063E50] hover:bg-[#052d38]'

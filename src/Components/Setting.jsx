@@ -300,7 +300,7 @@ const Setting = () => {
   return (
     <div className="w-[95%] m-auto mt-5 mb-28 sm:my-5">
       {/* Tabs */}
-      <div className="flex justify-start space-x-4 mb-5">
+      <div className="flex justify-center sm:justify-start space-x-4 mb-5">
         <button
           onClick={() => handleTabChange('editProfile')}
           className={`py-2 px-4 text-lg font-medium rounded-t-lg transition-colors duration-200 ${
@@ -311,7 +311,7 @@ const Setting = () => {
         >
           Profile
         </button>
-        <button
+        {/* <button
           onClick={() => handleTabChange('security')}
           className={`py-2 px-4 text-lg font-medium rounded-t-lg transition-colors duration-200 ${
             activeTab === 'security'
@@ -320,7 +320,7 @@ const Setting = () => {
           }`}
         >
           Security
-        </button>
+        </button> */}
         <button
           onClick={() => handleTabChange('changePassword')}
           className={`py-2 px-4 text-lg font-medium rounded-t-lg transition-colors duration-200 ${

@@ -203,7 +203,7 @@ const MyLevel = () => {
               max="100"
               className="w-full h-3 appearance-none rounded-full cursor-default"
               style={{
-                background: `linear-gradient(to right, #E9B348 0%, #E9B348 ${progressPercentage}%, white ${progressPercentage}%, white 100%)`,
+                background: `linear-gradient(to right, #22a116 0%, #22a116 ${progressPercentage}%, white ${progressPercentage}%, white 100%)`,
               }}
               disabled
             />
@@ -281,7 +281,7 @@ const MyLevel = () => {
                     cy="14.7935"
                     r="8.5"
                     fill="white"
-                    stroke="#FFA500"
+                    stroke="#bb2318"
                     strokeWidth="12.587"
                   />
                   <path
