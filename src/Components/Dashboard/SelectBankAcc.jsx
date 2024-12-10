@@ -20,18 +20,18 @@ import STANDARDCHARTERED from '../../assets/icon/DashboardIcon/BankIcon/STANDARD
 import YESBANK from '../../assets/icon/DashboardIcon/BankIcon/YESBANK.svg';
 
 // Firebase imports
-import { db } from '../../firebase'; // Ensure the correct path
+import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 const SelectBankAcc = () => {
   const navigate = useNavigate();
-  const { serviceId } = useParams(); // Get serviceId from URL parameters
+  const { serviceId } = useParams(); 
 
   const [availableBanks, setAvailableBanks] = useState([]);
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState(null);
+  const [earningsData, setEarningsData] = useState(null);
 
-  // Data array for the banks with bankId matching Firestore IDs
   const bankData = [
     { id: 1, bankId: 'hdfcBank', title: 'HDFC Bank', choose: 'Choose', icon: HDFC },
     { id: 2, bankId: 'idfcFirstBank', title: 'IDFC First Bank', choose: 'Choose', icon: IDFCBANK },
@@ -52,24 +52,29 @@ const SelectBankAcc = () => {
   useEffect(() => {
     const fetchAvailableBanks = async () => {
       try {
-        // Fetch the service document to get the list of banks that offer this service
+        // Fetch service data
         const serviceDocRef = doc(db, 'services', serviceId);
         const serviceDoc = await getDoc(serviceDocRef);
 
-        if (serviceDoc.exists()) {
-          const serviceData = serviceDoc.data();
-          const banksOfferingService = serviceData.banks; // Array of bank IDs
-          setServiceName(serviceData.name);
-
-          // Filter the bankData array to only include banks that offer this service
-          const filteredBanks = bankData.filter((bank) =>
-            banksOfferingService.includes(bank.bankId)
-          );
-
-          setAvailableBanks(filteredBanks);
-        } else {
-          console.log('Service not found');
+        if (!serviceDoc.exists()) {
           setError('Service not found.');
+          return;
+        }
+
+        const serviceData = serviceDoc.data();
+        const banksOfferingService = serviceData.banks || [];
+        setServiceName(serviceData.name);
+
+        const filteredBanks = bankData.filter((bank) =>
+          banksOfferingService.includes(bank.bankId)
+        );
+        setAvailableBanks(filteredBanks);
+
+        // Fetch earnings data
+        const earningsDocRef = doc(db, 'earnings', serviceId);
+        const earningsDoc = await getDoc(earningsDocRef);
+        if (earningsDoc.exists()) {
+          setEarningsData(earningsDoc.data());
         }
       } catch (error) {
         console.error('Error fetching available banks:', error);
@@ -107,14 +112,19 @@ const SelectBankAcc = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {availableBanks.map((bank) => (
-          <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl'>
+          <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'>
             <div className="flex items-center px-4 pl-8 py-4">
               <img src={bank.icon} alt={`${bank.title} Icon`} className="w-16 h-16 mr-4" />
               <div>
                 <h2 className="text-[#232323] font-semibold text-xl">{bank.title}</h2>
+                {earningsData && earningsData[bank.bankId] !== undefined && (
+                  <p className="text-[#495057] font-normal text-sm mt-1">
+                    You will earn: ₹{earningsData[bank.bankId]}
+                  </p>
+                )}
                 <p
                   onClick={() => navigate(`/dashboard/selectbank/${serviceId}/leaddetails/${bank.bankId}`)}
-                  className="text-[#063E50] cursor-pointer font-normal underline text-base"
+                  className="text-[#063E50] cursor-pointer font-normal underline text-base mt-2"
                 >
                   {bank.choose}
                 </p>

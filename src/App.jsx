@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-// Import your components
+// Import components
 import AuthLayout from './Components/AuthLayout';
 import Signup from './Components/Login&Signup/Signup';
 import Forgetpass from './Components/Login&Signup/Forgetpass';
@@ -26,10 +26,11 @@ import ConfirmationPage from './Components/Dashboard/ConfirmationPage';
 import Setting from './Components/Setting';
 import Termandcondition from './Components/Termandcondition';
 import SideBar from './Components/SideBar';
+import HeaderSearchbar from './Components/HeaderSearchbar';
 import ScrollToTop from './Components/ScrollToTop';
 import BottomNavigationBar from './Components/BottomNavigationBar';
-import { auth, db, storage } from './firebase';
-import ImportData from './ImportData';
+import ViewDetails from './Components/ViewDetails';
+import ReferAndEarn from './Components/ReferAndEarn';
 
 // Import ProtectedRoute
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -112,6 +113,37 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* New Route for ViewDetails */}
+        <Route
+          path="/view-details/:leadId"
+          element={
+            <ProtectedRoute>
+              <AuthLayout>
+                <SideBar />
+                <BottomNavigationBar />
+                <Header title="View Details" />
+                <ViewDetails />
+              </AuthLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* New Route for Refer & Earn */}
+        <Route
+          path="/refer-earn"
+          element={
+            <ProtectedRoute>
+              <AuthLayout>
+                <SideBar />
+                <BottomNavigationBar />
+                <Header title="Refer & Earn" />
+                <ReferAndEarn />
+              </AuthLayout>
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/paymentdetail"
           element={

@@ -1,5 +1,3 @@
-// src/Components/SideBar.jsx
-
 import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashboardIcon from "../assets/icon/SidebarIcon/Dashboard.svg";
@@ -54,7 +52,6 @@ const SideBar = () => {
       setIsOpen(false); // Close the sidebar after logout
     } catch (error) {
       console.error('Error signing out:', error);
-      // Optionally, display an error message to the user
       alert('Failed to log out. Please try again.');
     }
   };
@@ -73,23 +70,43 @@ const SideBar = () => {
   }, []);
 
   return (
-    <div className='z-[1000]' onClick={() => setIsOpenProfile(false)}>
+    <div className="z-[1000]" onClick={() => setIsOpenProfile(false)}>
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-[999] transition-opacity duration-300"
+          onClick={() => setIsOpen(false)}
+        ></div>
+      )}
+
       {/* Sidebar */}
       <div
         ref={sidebarRef}
-        className={`fixed left-0 top-0 h-full md:w-[17%] w-64 bg-white border-r transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
+        className={`fixed left-0 top-0 h-full md:w-[17%] w-64 bg-white border-r transition-transform duration-300 ease-in-out transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 z-[1000]`}
       >
         <div className="border-r-[0.5px] border-[#DEE2E6] text-[#ADB5BD] h-full flex flex-col">
           <div className="w-fit mx-auto">
-            <div className='flex justify-between ml-1 mt-4 '>
+            <div className="flex justify-between ml-1 mt-4">
               <img className="w-16" src={ApexLogo} alt="ApexLogo" />
-              {/* Toggle Button */}
               <button
                 className="md:hidden p-2"
                 onClick={() => setIsOpen(false)}
               >
-                <svg className='w-6' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className="w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 12H4M4 12L10 18M4 12L10 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
             </div>
@@ -126,9 +143,8 @@ const SideBar = () => {
               </button>
             </div>
           </div>
-
-          <div className="mt-auto">
-            <hr className='border-t border-[#ADB5BD] mb-1' />
+          <div className="mt-auto hidden lg:block">
+            <hr className="border-t border-[#ADB5BD] mb-1" />
             <div className="w-fit mx-auto space-y-4 py-2">
               <p className="font-medium text-sm">Apex. All rights reserved</p>
             </div>
