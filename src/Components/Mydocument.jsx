@@ -149,10 +149,17 @@ const Mydocument = () => {
       const uploadPromises = filesToUpload.map(
         async ({ file, name, fileName, oldFileName, setOldFileName }) => {
           if (file) {
+<<<<<<< HEAD
             // Compress the image before uploading (to ~150KB)
             const compressedFile = await compressImage(file, 150);
 
             // Delete old file if exists
+=======
+            // Compress the image before uploading
+            const compressedFile = await compressImage(file, 150); // Compress to 150KB
+
+            // Before uploading the new file, delete the existing file if it exists
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
             if (oldFileName) {
               const oldFileRef = ref(
                 storage,
@@ -177,6 +184,10 @@ const Mydocument = () => {
                   const progress =
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                   setUploadProgress((prevProgress) => {
+<<<<<<< HEAD
+=======
+                    // Calculate the average progress across all uploads
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
                     const totalFiles = filesToUpload.filter((f) => f.file).length;
                     const newProgress =
                       (prevProgress * (totalFiles - 1) + progress) / totalFiles;
@@ -306,6 +317,7 @@ const Mydocument = () => {
                 onClick={() => aadhaarFrontRef.current.click()}
                 readOnly
               />
+<<<<<<< HEAD
               {aadhaarFrontURL && (
                 <span
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -326,6 +338,24 @@ const Mydocument = () => {
                   </svg>
                 </span>
               )}
+=======
+              <span
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => aadhaarFrontRef.current.click()}
+              >
+                {/* Icon here */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
+              </span>
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
             </div>
           </div>
 
@@ -354,6 +384,7 @@ const Mydocument = () => {
                 onClick={() => aadhaarBackRef.current.click()}
                 readOnly
               />
+<<<<<<< HEAD
               {aadhaarBackURL && (
                 <span
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -374,6 +405,24 @@ const Mydocument = () => {
                   </svg>
                 </span>
               )}
+=======
+              <span
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => aadhaarBackRef.current.click()}
+              >
+                {/* Icon here */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
+              </span>
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
             </div>
           </div>
 
@@ -402,6 +451,7 @@ const Mydocument = () => {
                 onClick={() => passportPhotoRef.current.click()}
                 readOnly
               />
+<<<<<<< HEAD
               {passportPhotoURL && (
                 <span
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -422,6 +472,24 @@ const Mydocument = () => {
                   </svg>
                 </span>
               )}
+=======
+              <span
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => passportPhotoRef.current.click()}
+              >
+                {/* Icon here */}
+                {/* Example SVG Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-[#718EBF]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-4.553a1 1 0 011.414 1.414L16.414 12l4.553 4.553a1 1 0 01-1.414 1.414L15 13.414l-4.553 4.553a1 1 0 01-1.414-1.414L13.586 12 9.033 7.447a1 1 0 011.414-1.414L15 10z" />
+                </svg>
+              </span>
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
             </div>
           </div>
         </div>

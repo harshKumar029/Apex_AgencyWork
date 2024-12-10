@@ -22,6 +22,9 @@ import {
 import placeholderImage from '../assets/icon/profile-img.svg';
 import { compressImage } from '../utils/compressImage';
 
+// Import the compression utility
+import { compressImage } from '../utils/compressImage';
+
 const Setting = () => {
   const [activeTab, setActiveTab] = useState('editProfile');
   const [formData, setFormData] = useState({
@@ -37,7 +40,12 @@ const Setting = () => {
     workExperience: '',
     profilePhotoURL: '',
   });
+<<<<<<< HEAD
   const [isLoading, setIsLoading] = useState(true);
+=======
+  const [isLoading, setIsLoading] = useState(true); // Changed from 'loading'
+  // Removed 'error' state
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
 
   const [profileSuccess, setProfileSuccess] = useState('');
   const [profileError, setProfileError] = useState('');
@@ -50,6 +58,10 @@ const Setting = () => {
 
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
+<<<<<<< HEAD
+=======
+  // State for handling form submissions
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
 
@@ -63,7 +75,11 @@ const Setting = () => {
 
   // Fetch user data from Firestore with retry mechanism
   useEffect(() => {
+<<<<<<< HEAD
     let isMounted = true;
+=======
+    let isMounted = true; // To prevent setting state on unmounted component
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
 
     const fetchUserData = async () => {
       try {
@@ -86,29 +102,53 @@ const Setting = () => {
           if (profileDoc.exists()) {
             const profileData = profileDoc.data();
             if (isMounted) {
+<<<<<<< HEAD
               setFormData((prevData) => ({
                 ...prevData,
                 ...userData,
                 ...profileData,
               }));
+=======
+              setFormData({
+                ...formData,
+                ...userData,
+                ...profileData,
+              });
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
               setIsLoading(false);
             }
           } else {
             if (isMounted) {
+<<<<<<< HEAD
               setFormData((prevData) => ({
                 ...prevData,
                 ...userData,
               }));
+=======
+              setFormData({
+                ...formData,
+                ...userData,
+              });
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
               setIsLoading(false);
             }
           }
         } else {
           console.warn('No authenticated user found!');
+<<<<<<< HEAD
           window.location.href = '/login';
+=======
+          // Redirect to login if user is not authenticated
+          window.location.href = '/login'; // Alternatively, use navigate if using react-router
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
         }
       } catch (err) {
         console.error('Error fetching user data:', err);
         if (isMounted) {
+<<<<<<< HEAD
+=======
+          // Retry after 3 seconds
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
           setTimeout(fetchUserData, 3000);
         }
       }
@@ -117,8 +157,14 @@ const Setting = () => {
     fetchUserData();
 
     return () => {
+<<<<<<< HEAD
       isMounted = false;
     };
+=======
+      isMounted = false; // Cleanup flag
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
   }, []);
 
   const handleChange = (e) => {
@@ -219,16 +265,27 @@ const Setting = () => {
       const storagePath = `users/${user.uid}/ProfilePhoto/profilePhoto.${fileExtension}`;
       const storageRef = ref(storage, storagePath);
 
+<<<<<<< HEAD
       const compressedFile = await compressImage(file, 150);
       const metadata = {
         contentType: compressedFile.type,
       };
 
+=======
+      // Compress the image before uploading
+      const compressedFile = await compressImage(file, 150); // Compress to 150KB
+
+      // Delete the old profile photo if it exists
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
       await deleteObject(storageRef).catch((error) => {
         console.error('Error deleting old profile photo:', error);
       });
 
+<<<<<<< HEAD
       const uploadTask = uploadBytesResumable(storageRef, compressedFile, metadata);
+=======
+      const uploadTask = uploadBytesResumable(storageRef, compressedFile);
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
 
       uploadTask.on(
         'state_changed',
@@ -287,6 +344,19 @@ const Setting = () => {
         >
           Profile
         </button>
+<<<<<<< HEAD
+=======
+        {/* <button
+          onClick={() => handleTabChange('security')}
+          className={`py-2 px-4 text-lg font-medium rounded-t-lg transition-colors duration-200 ${
+            activeTab === 'security'
+              ? 'border-b-2 border-[#063E50] text-[#063E50]'
+              : 'text-[#718EBF] hover:text-[#063E50]'
+          }`}
+        >
+          Security
+        </button> */}
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
         <button
           onClick={() => handleTabChange('changePassword')}
           className={`py-2 px-4 text-lg font-medium rounded-t-lg transition-colors duration-200 ${
@@ -668,6 +738,403 @@ const Setting = () => {
                   ) : (
                     'Save'
                   )}
+<<<<<<< HEAD
+=======
+                </div>
+                <input
+                  type="file"
+                  id="profilePhotoInput"
+                  accept="image/*"
+                  onChange={handleProfilePhotoChange}
+                  className="hidden"
+                />
+              </div>
+
+              {/* Input Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                {/* Full Name */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="fullname">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    value={formData.fullname}
+                    onChange={handleChange}
+                    placeholder="Your Full Name"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Mobile Number */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="mobileNumber">
+                    Mobile Number
+                  </label>
+                  <input
+                    type="text"
+                    id="mobileNumber"
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                    placeholder="Your Mobile Number"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="youremail@example.com"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                    disabled
+                  />
+                </div>
+
+                {/* Date of Birth */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="dob">
+                    Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    value={formData.dob}
+                    onChange={handleChange}
+                    className="border placeholder-[#718EBF] border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Address */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="address">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    placeholder="Your Address"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* City */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="city">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    placeholder="Your City"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Postal Code */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="postalCode">
+                    Postal Code
+                  </label>
+                  <input
+                    type="text"
+                    id="postalCode"
+                    name="postalCode"
+                    value={formData.postalCode}
+                    onChange={handleChange}
+                    placeholder="Your Postal Code"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Country */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="country">
+                    Country
+                  </label>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    placeholder="Your Country"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Occupation */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="occupation">
+                    Occupation
+                  </label>
+                  <input
+                    type="text"
+                    id="occupation"
+                    name="occupation"
+                    value={formData.occupation}
+                    onChange={handleChange}
+                    placeholder="Your Occupation"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+
+                {/* Work Experience */}
+                <div className="flex flex-col space-y-2">
+                  <label className="text-[#212529]" htmlFor="workExperience">
+                    Work Experience
+                  </label>
+                  <input
+                    type="text"
+                    id="workExperience"
+                    name="workExperience"
+                    value={formData.workExperience}
+                    onChange={handleChange}
+                    placeholder="Your Work Experience"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none w-full"
+                  />
+                </div>
+              </div>
+            </div>
+            {/* Save Button */}
+            <div className="flex justify-center sm:justify-end mt-8">
+              <button
+                type="submit"
+                className={`bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center ${
+                  isSavingProfile ? 'cursor-not-allowed opacity-50' : ''
+                }`}
+                disabled={isSavingProfile}
+              >
+                {isSavingProfile ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 mr-3 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      ></path>
+                    </svg>
+                    Saving...
+                  </>
+                ) : (
+                  'Save'
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Content for Security Tab */}
+      {activeTab === 'security' && (
+        <div>
+          <div className="flex flex-col space-y-4">
+            {/* Two-Factor Authentication Section */}
+            <h2 className="text-lg font-bold text-[#063E50]">
+              Two-factor Authentication
+            </h2>
+
+            {/* Toggle Button */}
+            <label className="inline-flex items-center mb-5 cursor-pointer">
+              <input type="checkbox" className="sr-only peer" />
+              <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-[#d2d2d2] peer-focus:ring-4 peer-focus:ring-[#063E50] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#063E50]"></div>
+              <span className="ms-3 text-base font-normal text-[#212529]">
+                Enable or disable two-factor authentication
+              </span>
+            </label>
+          </div>
+          {/* Save Button */}
+          <div className="flex justify-center sm:justify-end mt-8">
+            <button
+              className="bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Content for Change Password Tab */}
+      {activeTab === 'changePassword' && (
+        <div>
+          <div className="flex flex-col space-y-4">
+            {/* Change Password Section */}
+            <h2 className="text-lg font-bold text-[#063E50]">
+              Change Password
+            </h2>
+
+            {/* Display Success or Error Message */}
+            {passwordSuccess && (
+              <div className="flex items-center mb-4 p-4 bg-green-100 border border-green-200 rounded-md">
+                <svg
+                  className="w-6 h-6 text-green-600 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span className="text-green-700">
+                  {passwordSuccess}
+                </span>
+              </div>
+            )}
+            {passwordError && (
+              <div className="flex items-center mb-4 p-4 bg-red-100 border border-red-200 rounded-md">
+                <svg
+                  className="w-6 h-6 text-red-600 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                <span className="text-red-700">
+                  {passwordError}
+                </span>
+              </div>
+            )}
+
+            <form onSubmit={handlePasswordChange}>
+              <div className="flex flex-col md:flex-col md:w-1/3 space-y-4">
+                <div className="flex flex-col space-y-2 w-full">
+                  <label
+                    className="text-[#212529]"
+                    htmlFor="currentPassword"
+                  >
+                    Current Password
+                  </label>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    value={currentPassword}
+                    onChange={(e) =>
+                      setCurrentPassword(e.target.value)
+                    }
+                    placeholder="Current Password"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col space-y-2 w-full">
+                  <label
+                    className="text-[#212529]"
+                    htmlFor="newPassword"
+                  >
+                    New Password
+                  </label>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    value={newPassword}
+                    onChange={(e) =>
+                      setNewPassword(e.target.value)
+                    }
+                    placeholder="New Password"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col space-y-2 w-full">
+                  <label
+                    className="text-[#212529]"
+                    htmlFor="confirmPassword"
+                  >
+                    Confirm New Password
+                  </label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) =>
+                      setConfirmPassword(e.target.value)
+                    }
+                    placeholder="Confirm New Password"
+                    className="placeholder-[#718EBF] border border-[#DEE2E6] rounded-lg px-4 py-2 outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              {/* Save Button */}
+              <div className="flex justify-center sm:justify-end mt-8">
+                <button
+                  type="submit"
+                  className={`bg-[#063E50] text-white py-2 px-20 w-full sm:w-auto sm:px-12 rounded-full transition-transform duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center ${
+                    isSavingPassword ? 'cursor-not-allowed opacity-50' : ''
+                  }`}
+                  disabled={isSavingPassword}
+                >
+                  {isSavingPassword ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5 mr-3 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
+                      </svg>
+                      Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
                 </button>
               </div>
             </form>

@@ -211,7 +211,11 @@ const Signup = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className='md:bg-blue-primary bg-white flex flex-col md:flex-row h-auto h-screen overflow-hidden'>
+=======
+    <div className="md:bg-blue-primary bg-white flex flex-col md:flex-row h-auto md:h-screen overflow-hidden">
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
       {/* Left Section */}
       <section className="pt-4 hidden md:block pb-8 px-14 space-y-3 relative md:w-[45vw] h-full">
         <img className="w-36" src={Apexlogo} alt="ApexLogo" />

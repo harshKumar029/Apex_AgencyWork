@@ -214,6 +214,7 @@ const Dashboard = () => {
   return (
     <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
 
+<<<<<<< HEAD
       {/* ID Card Modal */}
       <IDCardModal
         isOpen={isModalOpen}
@@ -266,7 +267,41 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+=======
+{/* Welcome and Info Cards */}
+<div className="flex flex-col sm:flex-row sm:space-x-4 mb-6">
+  {/* Welcome Card */}
+  <div className="flex flex-col items-center sm:items-start sm:flex-grow py-4 w-full justify-center sm:w-auto">
+    <div>
+      <h4 className="text-[#232323] font-semibold text-2xl">Welcome {fullName}!</h4>
+      <p className="text-[#ADB5BD] font-normal text-xl">Explore our all features and services.</p>
+    </div>
+  </div>
+
+  {/* Info Cards Container */}
+  <div className="flex flex-row space-x-4 sm:space-x-10">
+    {/* Offer Letter Card */}
+    <div className="flex items-center border bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg border-[#DEE2E6] rounded-3xl p-6 w-1/2 sm:w-auto transform transition-transform hover:scale-105">
+      <div className="flex flex-col items-center text-center w-full">
+        <h2 className="text-white font-semibold text-2x1 mb-2">Your Offer Letter</h2>
+        <button className="bg-white text-blue-600 font-medium py-2 px-4 rounded-full shadow-md hover:bg-blue-100 transition-all duration-200 ease-in-out">
+          Download
+        </button>
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
       </div>
+    </div>
+
+    {/* ID Card */}
+    <div className="flex items-center border bg-gradient-to-r from-green-400 to-teal-500 shadow-lg border-[#DEE2E6] rounded-3xl p-6 w-1/2 sm:w-auto transform transition-transform hover:scale-105">
+      <div className="flex flex-col items-center text-center w-full">
+        <h2 className="text-white font-semibold text-2x1 mb-2">Your ID Card</h2>
+        <button className="bg-white text-green-600 font-medium py-2 px-4 rounded-full shadow-md hover:bg-green-100 transition-all duration-200 ease-in-out">
+          Download
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* Services Section */}
       <div>

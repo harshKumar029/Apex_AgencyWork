@@ -203,12 +203,20 @@ const ReferAndEarn = () => {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       </div>
       <div className="bg-white shadow-md rounded-lg p-6 mt-8">
         {/* Referral List */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-[#063E50] mb-4 text-center">
             Your Referrals User Details
+=======
+
+        {/* Referral List */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold text-[#063E50] mb-4">
+            Your Referrals
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
           </h2>
           {referralList.length > 0 ? (
             <div className="overflow-x-auto">
@@ -248,8 +256,13 @@ const ReferAndEarn = () => {
       </div>
       <div className='bg-white shadow-md rounded-lg'>
         {/* How It Works */}
+<<<<<<< HEAD
         <div className="mt-8 p-6">
           <h2 className="text-xl font-semibold text-[#063E50] mb-4 text-center">
+=======
+        <div className="mt-12 p-6">
+          <h2 className="text-2xl font-bold text-[#063E50] mb-6 text-center">
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
             How It Works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

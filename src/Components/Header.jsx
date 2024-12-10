@@ -246,7 +246,11 @@ const Header = ({ title, showSearch = true, children }) => {
           {/* Earning Icon */}
           <Link to='/earning'>
             <svg
+<<<<<<< HEAD
               className="w-12 h-10 hidden sm:block cursor-pointer text-[#063e50] bg-[#F8FAFA] p-1 rounded-full"
+=======
+              className="w-9 h-9 hidden sm:block cursor-pointer text-[#ADB5BD] bg-[#F8FAFA] p-1 rounded-full"
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
