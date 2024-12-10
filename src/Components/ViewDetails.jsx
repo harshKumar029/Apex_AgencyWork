@@ -112,10 +112,6 @@ const ViewDetails = () => {
     }
   };
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
   // Helper function to safely get a field value or 'N/A'
   const getValueOrNA = (val) => (val ? val : 'N/A');
 
@@ -188,75 +184,6 @@ const ViewDetails = () => {
   // Filter out fields that have 'N/A' value since we don't want to show fields with no data
   inputFields = inputFields.filter(field => field.value !== 'N/A');
 
-<<<<<<< HEAD
-=======
-=======
-  // Updated inputFields array based on your requirements
-  const inputFields = [
-    { label: 'Customer Name', value: customer.fullname || 'N/A' },
-    {
-      label: 'Bank Chosen',
-      value: bankNames[lead.bankId] || lead.bankId || 'N/A',
-    },
-    {
-      label: 'Service Chosen',
-      value: serviceNames[lead.serviceId] || lead.serviceId || 'N/A',
-    },
-    {
-      label: 'Submission Date',
-      value: formatDate(lead.submissionDate),
-    },
-    { label: 'Status', value: lead.status || 'N/A' },
-    { label: 'Mobile Number', value: customer.mobile || 'N/A' },
-    { label: 'Email ID', value: customer.email || 'N/A' },
-    { label: 'Father Name', value: customer.fatherName || 'N/A' },
-    { label: 'Mother Name', value: customer.motherName || 'N/A' },
-    { label: 'PAN Card Number', value: customer.panCardNumber || 'N/A' },
-    {
-      label: 'Date of Birth',
-      value: formatDate(customer.dob),
-    },
-    {
-      label: 'Aadhaar Card Number',
-      value: customer.aadhaarNumber || 'N/A',
-    },
-    { label: 'Address', value: customer.address || 'N/A' },
-    {
-      label: 'RESIDENCE LANDMARK',
-      value: customer.residenceLandmark || 'N/A',
-    },
-    { label: 'Pin Code', value: customer.postalCode || 'N/A' },
-    {
-      label: 'SALARIED/SELF EMPLOYED',
-      value: customer.employmentType || 'N/A',
-    },
-    { label: 'Company Name', value: customer.companyName || 'N/A' },
-    { label: 'Designation', value: customer.designation || 'N/A' },
-    {
-      label: 'Company Address',
-      value: customer.companyAddress || 'N/A',
-    },
-    {
-      label: 'COMPANY LANDMARK',
-      value: customer.companyLandmark || 'N/A',
-    },
-    {
-      label: 'COMPANY PINCODE',
-      value: customer.companyPincode || 'N/A',
-    },
-    {
-      label: 'Official Email ID',
-      value: customer.officialEmail || 'N/A',
-    },
-    { label: 'NET SALARY', value: customer.netSalary || 'N/A' },
-    {
-      label: 'Expecting Credit Limit',
-      value: lead.amount || 'N/A',
-    },
-  ];
-
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
   return (
     <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
       <div className='flex items-center py-4 w-full'>
@@ -292,15 +219,7 @@ const ViewDetails = () => {
           let fieldValue = field.value;
 
           // Check if the field is 'Email ID' and length is more than 20
-<<<<<<< HEAD
           if (field.label === 'Email ID' && typeof fieldValue === 'string' && fieldValue.length > 20) {
-=======
-<<<<<<< HEAD
-          if (field.label === 'Email ID' && typeof fieldValue === 'string' && fieldValue.length > 20) {
-=======
-          if (field.label === 'Email ID' && fieldValue.length > 20) {
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
             fieldValue = (
               <>
                 {fieldValue.slice(0, 20)}
@@ -317,10 +236,6 @@ const ViewDetails = () => {
               </h3>
               <p
                 className={`text-base rounded-full w-1/2 ${
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
                   field.label === 'Status' && typeof fieldValue === 'string'
                     ? fieldValue.toLowerCase() === 'pending'
                       ? 'bg-[#D3B6262E] text-[#D3B626] px-4'
@@ -329,19 +244,6 @@ const ViewDetails = () => {
                       : fieldValue.toLowerCase() === 'rejected'
                       ? 'bg-[#DC35452E] text-[#DC3545] px-4'
                       : fieldValue.toLowerCase() === 'in process'
-<<<<<<< HEAD
-=======
-=======
-                  field.label === 'Status'
-                    ? field.value.toLowerCase() === 'pending'
-                      ? 'bg-[#D3B6262E] text-[#D3B626] px-4'
-                      : field.value.toLowerCase() === 'approved'
-                      ? 'bg-[#28A7452E] text-[#28A745] px-4'
-                      : field.value.toLowerCase() === 'rejected'
-                      ? 'bg-[#DC35452E] text-[#DC3545] px-4'
-                      : field.value.toLowerCase() === 'in process'
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
                       ? 'bg-[#FBB34933] text-[#FBB349] px-4'
                       : 'text-[#718EBF]'
                     : 'text-[#718EBF]'

@@ -20,35 +20,15 @@ const MyLevel = () => {
   const [leadsInCurrentLevel, setLeadsInCurrentLevel] = useState(0);
   const [nextLevelName, setNextLevelName] = useState('');
 
-<<<<<<< HEAD
   // State for fetching level data from Firestore
   const [levelsData, setLevelsData] = useState([]);
   const [levelsLoading, setLevelsLoading] = useState(true);
-=======
-<<<<<<< HEAD
-  // State for fetching level data from Firestore
-  const [levelsData, setLevelsData] = useState([]);
-  const [levelsLoading, setLevelsLoading] = useState(true);
-=======
-  // Define the levels and their thresholds
-  const levels = [
-    { name: 'Silver', threshold: 7 },
-    { name: 'Gold', threshold: 14 },
-    { name: 'Platinum', threshold: 21 },
-    { name: 'DIAMOND', threshold: 28 },
-  ];
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
 
   // Fetch approved leads when the component mounts
   useEffect(() => {
     // Listen for authentication state changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
         try {
           const now = new Date();
           // Calculate the start and end of the current month in UTC
@@ -56,33 +36,11 @@ const MyLevel = () => {
           const lastDayOfMonth = new Date(
             Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0, 23, 59, 59, 999)
           );
-<<<<<<< HEAD
-=======
-=======
-        console.log('Authenticated user UID:', user.uid);
-
-        try {
-          const now = new Date();
-
-          // Calculate the start and end of the current month in UTC to avoid timezone issues
-          const firstDayOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
-          const lastDayOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0, 23, 59, 59, 999));
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
 
           // Convert to Firestore Timestamps
           const startTimestamp = Timestamp.fromDate(firstDayOfMonth);
           const endTimestamp = Timestamp.fromDate(lastDayOfMonth);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-          console.log('Fetching approved leads for user:', user.uid);
-          console.log('Date range:', startTimestamp.toDate(), '-', endTimestamp.toDate());
-
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           // Construct the Firestore query
           const leadsQuery = query(
             collection(db, 'leads'),
@@ -95,33 +53,11 @@ const MyLevel = () => {
           // Execute the query
           const leadsSnapshot = await getDocs(leadsQuery);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           if (leadsSnapshot.empty) {
             setApprovedLeadsCount(0);
           } else {
             const count = leadsSnapshot.size;
             setApprovedLeadsCount(count);
-<<<<<<< HEAD
-=======
-=======
-          // Check if the snapshot is empty
-          if (leadsSnapshot.empty) {
-            console.log('No matching documents found.');
-            setApprovedLeadsCount(0);
-          } else {
-            const count = leadsSnapshot.size;
-            console.log('Approved leads count:', count);
-            setApprovedLeadsCount(count);
-
-            // Log each lead's data for verification
-            leadsSnapshot.forEach((doc) => {
-              console.log('Lead ID:', doc.id, 'Data:', doc.data());
-            });
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           }
         } catch (err) {
           console.error('Error fetching approved leads:', err);
@@ -130,21 +66,10 @@ const MyLevel = () => {
           setLoading(false);
         }
       } else {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-        console.log('No user is signed in.');
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
         setLoading(false);
       }
     });
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
     return () => unsubscribe();
   }, []);
 
@@ -189,18 +114,6 @@ const MyLevel = () => {
   useEffect(() => {
     if (approvedLeadsCount !== null && !loading && !levelsLoading && levelsData.length > 0) {
       const levels = levelsData;
-<<<<<<< HEAD
-=======
-=======
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, []);
-
-  // Calculate level progress when approvedLeadsCount or loading changes
-  useEffect(() => {
-    if (approvedLeadsCount !== null && !loading) {
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
       let completed = [];
       let current = null;
       let prevThreshold = 0;
@@ -209,13 +122,6 @@ const MyLevel = () => {
       let leadsInCurrent = 0;
       let nextName = '';
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-      // Determine completed and current levels
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
       for (let i = 0; i < levels.length; i++) {
         if (approvedLeadsCount >= levels[i].threshold) {
           completed.push(levels[i]);
@@ -228,15 +134,7 @@ const MyLevel = () => {
       if (!current && completed.length === levels.length) {
         // User has reached the highest level
         current = levels[levels.length - 1];
-<<<<<<< HEAD
         prevThreshold = levels[levels.length - 2]?.threshold || 0;
-=======
-<<<<<<< HEAD
-        prevThreshold = levels[levels.length - 2]?.threshold || 0;
-=======
-        prevThreshold = levels[levels.length - 2]?.threshold || 0; // Previous threshold or 0
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
         progress = 100;
         leadsNeeded = 0;
         leadsInCurrent = current.threshold - prevThreshold;
@@ -249,26 +147,11 @@ const MyLevel = () => {
         }
 
         leadsInCurrent = approvedLeadsCount - prevThreshold;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
         leadsNeeded = current ? current.threshold - approvedLeadsCount : 0;
         progress = current ? (leadsInCurrent / (current.threshold - prevThreshold)) * 100 : 100;
         nextName = current ? current.name : '';
       }
 
-<<<<<<< HEAD
-=======
-=======
-        leadsNeeded = current.threshold - approvedLeadsCount;
-        progress = (leadsInCurrent / (current.threshold - prevThreshold)) * 100;
-        nextName = current.name;
-      }
-
-      // Update state variables
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
       setCompletedLevels(completed);
       setCurrentLevel(current);
       setPreviousLevelThreshold(prevThreshold);
@@ -277,23 +160,10 @@ const MyLevel = () => {
       setLeadsInCurrentLevel(leadsInCurrent);
       setNextLevelName(nextName);
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
   }, [approvedLeadsCount, loading, levelsLoading, levelsData]);
 
   // Render loading state
   if (loading || levelsLoading) {
-<<<<<<< HEAD
-=======
-=======
-  }, [approvedLeadsCount, loading, levels]);
-
-  // Render loading state
-  if (loading) {
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
     return (
       <div className='flex justify-center items-center h-full'>
         <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
@@ -339,18 +209,7 @@ const MyLevel = () => {
           {/* Progress Bar */}
           <div className="relative w-full flex items-center">
             {/* Left Circle */}
-<<<<<<< HEAD
             <div className="w-7 absolute left-0 -translate-x-1/2"></div>
-=======
-<<<<<<< HEAD
-            <div className="w-7 absolute left-0 -translate-x-1/2"></div>
-=======
-            <div className="w-7 absolute left-0 -translate-x-1/2">
-              {/* Left circle SVG */}
-              {/* Replace with your SVG code */}
-            </div>
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
 
             <input
               id="large-range"
@@ -359,15 +218,7 @@ const MyLevel = () => {
               max="100"
               className="w-full h-3 appearance-none rounded-full cursor-default"
               style={{
-<<<<<<< HEAD
                 background: `linear-gradient(to right, #E9B348 0%, #E9B348 ${progressPercentage}%, white ${progressPercentage}%, white 100%)`,
-=======
-<<<<<<< HEAD
-                background: `linear-gradient(to right, #E9B348 0%, #E9B348 ${progressPercentage}%, white ${progressPercentage}%, white 100%)`,
-=======
-                background: `linear-gradient(to right, #22a116 0%, #22a116 ${progressPercentage}%, white ${progressPercentage}%, white 100%)`,
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
               }}
               disabled
             />
@@ -378,15 +229,7 @@ const MyLevel = () => {
 
           <div className="text-xl flex justify-between text-white">
             <div className="font-normal text-xl">
-<<<<<<< HEAD
               <p>Monthly Sales {approvedLeadsCount}</p>
-=======
-<<<<<<< HEAD
-              <p>Monthly Sales {approvedLeadsCount}</p>
-=======
-              <p>Total Sales {approvedLeadsCount}</p>
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
             </div>
             <div className="font-normal text-xl">
               <p>Pending {leadsNeededForCurrentLevel > 0 ? leadsNeededForCurrentLevel : 0}</p>
@@ -406,24 +249,12 @@ const MyLevel = () => {
 
       {/* Column of Cards */}
       <div className="grid grid-cols-1 gap-4">
-<<<<<<< HEAD
         {levelsData.map((level, index) => (
-=======
-<<<<<<< HEAD
-        {levelsData.map((level, index) => (
-=======
-        {levels.map((level, index) => (
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           <div
             key={index}
             className="border bg-white_custom border-[#DEE2E6] rounded-3xl p-4 space-y-5"
           >
             <h2 className="text-[#063E50] font-bold text-xl">{level.name}</h2>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
             <div className="flex justify-between items-center">
               <p className="text-[#063E50] flex items-center gap-3 font-semibold text-lg">
                 {approvedLeadsCount >= level.threshold ? 'Completed' : 'Pending'}
@@ -475,65 +306,6 @@ const MyLevel = () => {
               </p>
               <p className="text-[#063E50] font-semibold text-lg">Bonus: ₹ {level.earning}</p>
             </div>
-<<<<<<< HEAD
-=======
-=======
-            <p className="text-[#063E50] flex items-center gap-3 font-semibold text-lg">
-              {approvedLeadsCount >= level.threshold ? 'Completed' : 'Pending'}
-              {approvedLeadsCount >= level.threshold ? (
-                // Completed Icon
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 30 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="14.7935"
-                    cy="14.7935"
-                    r="8.5"
-                    fill="white"
-                    stroke="#5DD326"
-                    strokeWidth="12.587"
-                  />
-                  <path
-                    d="M5.07208 16.6953L8.63837 20.2616M13.6312 14.5555L17.1975 10.9893M10.7781 16.6953L14.3444 20.2616L22.9035 10.9893"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ) : (
-                // Pending Icon
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 30 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="14.7935"
-                    cy="14.7935"
-                    r="8.5"
-                    fill="white"
-                    stroke="#bb2318"
-                    strokeWidth="12.587"
-                  />
-                  <path
-                    d="M15 10V16L18 19"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </p>
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           </div>
         ))}
       </div>
@@ -541,12 +313,4 @@ const MyLevel = () => {
   );
 };
 
-<<<<<<< HEAD
 export default MyLevel;
-=======
-<<<<<<< HEAD
-export default MyLevel;
-=======
-export default MyLevel;
->>>>>>> 777b62fe33d77e3739b4767937f818147576845b
->>>>>>> d90602401d1c06139f1417587e52cb38e0232611
