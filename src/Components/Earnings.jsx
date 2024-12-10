@@ -252,7 +252,15 @@ const Earnings = () => {
       {/* Row of Cards */}
       <div className="flex justify-between mb-6 gap-4">
         {/* Card 1 - Total Earnings */}
+<<<<<<< HEAD
         <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+<<<<<<< HEAD
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
+>>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           <img src={MoneyIcon} alt="MoneyIcon" className="w-16 h-16 sm:mr-4 bg-[#8416DB0F] rounded-full p-4" />
           <div className='text-center mx-auto'>
             <h2 className="text-[#063E50] font-normal text-base">Total Earnings</h2>
@@ -261,7 +269,15 @@ const Earnings = () => {
         </div>
 
         {/* Card 2 - Paid */}
+<<<<<<< HEAD
         <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+<<<<<<< HEAD
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
+>>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           <img src={Paidtick} alt="Paidtick" className="w-16 h-16 sm:mr-4 bg-[#5DD32524] rounded-full p-4" />
           <div className='text-center mx-auto '>
             <h2 className="text-[#063E50] font-normal text-base">Paid</h2>
@@ -270,7 +286,15 @@ const Earnings = () => {
         </div>
 
         {/* Card 3 - Pending */}
+<<<<<<< HEAD
         <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+<<<<<<< HEAD
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-60">
+=======
+        <div className="flex items-center flex-col bg-white_custom sm:flex-row border border-[#DEE2E6] rounded-3xl p-4 w-full sm:w-auto">
+>>>>>>> 777b62fe33d77e3739b4767937f818147576845b
+>>>>>>> d90602401d1c06139f1417587e52cb38e0232611
           <img src={Warning} alt="Warning" className="w-16 h-16 sm:mr-4 bg-[#F47A7A14] rounded-full p-4" />
           <div className='text-center mx-auto'>
             <h2 className="text-[#063E50] font-normal text-base">Pending</h2>
