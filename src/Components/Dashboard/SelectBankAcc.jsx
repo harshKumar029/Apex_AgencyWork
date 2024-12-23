@@ -20,18 +20,25 @@ import STANDARDCHARTERED from '../../assets/icon/DashboardIcon/BankIcon/STANDARD
 import YESBANK from '../../assets/icon/DashboardIcon/BankIcon/YESBANK.svg';
 
 // Firebase imports
-import { db } from '../../firebase'; // Ensure the correct path
+import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 const SelectBankAcc = () => {
   const navigate = useNavigate();
-  const { serviceId } = useParams(); // Get serviceId from URL parameters
+  const { serviceId } = useParams(); 
 
   const [availableBanks, setAvailableBanks] = useState([]);
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState(null);
+  const [earningsData, setEarningsData] = useState(null);
 
-  // Data array for the banks with bankId matching Firestore IDs
+  // For popup
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedBank, setSelectedBank] = useState(null);
+  
+  // We'll determine if the service is a Credit Card by checking its name
+  const [isCreditCardService, setIsCreditCardService] = useState(false);
+
   const bankData = [
     { id: 1, bankId: 'hdfcBank', title: 'HDFC Bank', choose: 'Choose', icon: HDFC },
     { id: 2, bankId: 'idfcFirstBank', title: 'IDFC First Bank', choose: 'Choose', icon: IDFCBANK },
@@ -52,24 +59,35 @@ const SelectBankAcc = () => {
   useEffect(() => {
     const fetchAvailableBanks = async () => {
       try {
-        // Fetch the service document to get the list of banks that offer this service
+        // Fetch service data
         const serviceDocRef = doc(db, 'services', serviceId);
         const serviceDoc = await getDoc(serviceDocRef);
 
-        if (serviceDoc.exists()) {
-          const serviceData = serviceDoc.data();
-          const banksOfferingService = serviceData.banks; // Array of bank IDs
-          setServiceName(serviceData.name);
-
-          // Filter the bankData array to only include banks that offer this service
-          const filteredBanks = bankData.filter((bank) =>
-            banksOfferingService.includes(bank.bankId)
-          );
-
-          setAvailableBanks(filteredBanks);
-        } else {
-          console.log('Service not found');
+        if (!serviceDoc.exists()) {
           setError('Service not found.');
+          return;
+        }
+
+        const serviceData = serviceDoc.data();
+        const banksOfferingService = serviceData.banks || [];
+        setServiceName(serviceData.name);
+
+        // Check if this service is "Credit Card"
+        const lowerCaseServiceName = (serviceData.name || '').toLowerCase();
+        if (lowerCaseServiceName.includes('credit card')) {
+          setIsCreditCardService(true);
+        }
+
+        const filteredBanks = bankData.filter((bank) =>
+          banksOfferingService.includes(bank.bankId)
+        );
+        setAvailableBanks(filteredBanks);
+
+        // Fetch earnings data
+        const earningsDocRef = doc(db, 'earnings', serviceId);
+        const earningsDoc = await getDoc(earningsDocRef);
+        if (earningsDoc.exists()) {
+          setEarningsData(earningsDoc.data());
         }
       } catch (error) {
         console.error('Error fetching available banks:', error);
@@ -79,6 +97,26 @@ const SelectBankAcc = () => {
 
     fetchAvailableBanks();
   }, [serviceId]);
+
+  // Handle bank selection
+  const handleBankSelect = (bank) => {
+    // If it's a Credit Card service, show popup to choose Full or Partial
+    if (isCreditCardService) {
+      setSelectedBank(bank);
+      setShowPopup(true);
+    } else {
+      // For non-credit card services, go directly
+      navigate(`/dashboard/selectbank/${serviceId}/leaddetails/${bank.bankId}`);
+    }
+  };
+
+  // Handle upload type in popup
+  const handleUploadType = (type) => {
+    setShowPopup(false);
+    if (!selectedBank) return;
+    // Navigate with uploadType as a query param
+    navigate(`/dashboard/selectbank/${serviceId}/leaddetails/${selectedBank.bankId}?uploadType=${type}`);
+  };
 
   if (error) {
     return (
@@ -107,14 +145,22 @@ const SelectBankAcc = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {availableBanks.map((bank) => (
-          <div key={bank.id} className='border bg-white_custom border-[#DEE2E6] rounded-3xl'>
+          <div 
+            key={bank.id} 
+            className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'
+          >
             <div className="flex items-center px-4 pl-8 py-4">
               <img src={bank.icon} alt={`${bank.title} Icon`} className="w-16 h-16 mr-4" />
               <div>
                 <h2 className="text-[#232323] font-semibold text-xl">{bank.title}</h2>
+                {earningsData && earningsData[bank.bankId] !== undefined && (
+                  <p className="text-[#495057] font-normal text-sm mt-1">
+                    You will earn upto: ₹{earningsData[bank.bankId]}
+                  </p>
+                )}
                 <p
-                  onClick={() => navigate(`/dashboard/selectbank/${serviceId}/leaddetails/${bank.bankId}`)}
-                  className="text-[#063E50] cursor-pointer font-normal underline text-base"
+                  onClick={() => handleBankSelect(bank)}
+                  className="text-[#063E50] cursor-pointer font-normal underline text-base mt-2"
                 >
                   {bank.choose}
                 </p>
@@ -123,6 +169,57 @@ const SelectBankAcc = () => {
           </div>
         ))}
       </div>
+
+      {/* Popup for Credit Card service */}
+      {showPopup && (
+        <div 
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+          onClick={() => setShowPopup(false)} // clicking outside closes the popup
+        >
+          <div 
+            className="bg-white w-11/12 sm:w-96 p-6 rounded-xl relative"
+            onClick={(e) => e.stopPropagation()} // prevent popup close on content click
+          >
+            <h2 className="text-xl font-semibold text-center text-[#343C6A]">Lead Upload Type</h2>
+            <p className="mt-2 text-center text-[#495057]">
+              Please select how you want to upload the lead
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center mt-6 gap-3">
+              <button
+                onClick={() => handleUploadType('full')}
+                className="bg-[#063E50] text-white py-2 px-4 rounded-md w-full sm:w-auto"
+              >
+                Full Lead Upload
+              </button>
+              <button
+                onClick={() => handleUploadType('partial')}
+                className="bg-[#0f8092] text-white py-2 px-4 rounded-md w-full sm:w-auto"
+              >
+                Partial Lead Upload
+              </button>
+            </div>
+
+            <button 
+              className="absolute top-2 right-3 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowPopup(false)}
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-6 w-6" fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth="2" 
+                  d="M6 18L18 6M6 6l12 12" 
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

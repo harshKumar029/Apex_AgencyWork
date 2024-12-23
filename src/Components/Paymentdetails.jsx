@@ -75,12 +75,16 @@ const Paymentdetails = () => {
   };
 
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <img src="/loading.gif" alt="Loading..." style={{ width: '100px', height: '100px' }}/>
+      </div>
+    );
   }
 
   return (
     <div className="w-[95%] m-auto mt-5 mb-28 sm:my-5">
-      <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Payment Details</h1>
+      <h1 className="text-2xl font-medium text-[#343C6A] mb-4">Bank Account Details</h1>
 
       {/* Display Success or Error Message */}
       {successMessage && (
