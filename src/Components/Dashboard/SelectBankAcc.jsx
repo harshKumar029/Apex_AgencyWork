@@ -21,12 +21,10 @@ import YESBANK from '../../assets/icon/DashboardIcon/BankIcon/YESBANK.svg';
 
 // Firebase imports
 import { db } from '../../firebase';
-import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 const SelectBankAcc = () => {
   const navigate = useNavigate();
-  const { serviceId } = useParams(); 
   const { serviceId } = useParams(); 
 
   const [availableBanks, setAvailableBanks] = useState([]);
@@ -62,18 +60,9 @@ const SelectBankAcc = () => {
     const fetchAvailableBanks = async () => {
       try {
         // Fetch service data
-        // Fetch service data
         const serviceDocRef = doc(db, 'services', serviceId);
         const serviceDoc = await getDoc(serviceDocRef);
 
-        if (!serviceDoc.exists()) {
-          setError('Service not found.');
-          return;
-        }
-
-        const serviceData = serviceDoc.data();
-        const banksOfferingService = serviceData.banks || [];
-        setServiceName(serviceData.name);
         if (!serviceDoc.exists()) {
           setError('Service not found.');
           return;
