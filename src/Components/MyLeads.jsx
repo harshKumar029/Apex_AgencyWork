@@ -6,11 +6,16 @@ import { auth, db } from '../firebase';
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { generateCSV } from '../utils/csvUtils';
+import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { generateCSV } from '../utils/csvUtils';
 
 const MyLeads = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [allLeads, setAllLeads] = useState([]);
   const [filteredLeads, setFilteredLeads] = useState([]);
+  const [displayedLeads, setDisplayedLeads] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(10); // Initial number of leads to display
   const [displayedLeads, setDisplayedLeads] = useState([]);
   const [visibleCount, setVisibleCount] = useState(10); // Initial number of leads to display
 
@@ -110,6 +115,18 @@ const MyLeads = () => {
           return dateB - dateA; // descending order
         });
 
+
+        // Sort leadsData by submissionDate in descending order (New to Old)
+        leadsData.sort((a, b) => {
+          const dateA = a.submissionDate
+            ? a.submissionDate.toDate()
+            : new Date(0);
+          const dateB = b.submissionDate
+            ? b.submissionDate.toDate()
+            : new Date(0);
+          return dateB - dateA; // descending order
+        });
+
         setAllLeads(leadsData);
         setLoading(false);
       } catch (err) {
@@ -131,6 +148,9 @@ const MyLeads = () => {
     } else if (activeFilter === 'New') {
       // Leads from the last 5 days
       filtered = allLeads.filter((lead) => {
+        const submissionDate = lead.submissionDate
+          ? lead.submissionDate.toDate()
+          : null;
         const submissionDate = lead.submissionDate
           ? lead.submissionDate.toDate()
           : null;
@@ -171,6 +191,9 @@ const MyLeads = () => {
           const submissionDate = lead.submissionDate
             ? lead.submissionDate.toDate()
             : null;
+          const submissionDate = lead.submissionDate
+            ? lead.submissionDate.toDate()
+            : null;
           if (!submissionDate) return false;
           const diffTime = Math.abs(today - submissionDate);
           const diffMonths = diffTime / (1000 * 60 * 60 * 24 * 30);
@@ -179,6 +202,28 @@ const MyLeads = () => {
         return false;
       });
     }
+
+    // Filter based on search query
+    if (searchQuery.trim() !== '') {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter((lead) => {
+        const customerName =
+          lead.customerDetails?.fullname?.toLowerCase() || '';
+        const serviceName =
+          serviceNames[lead.serviceId]?.toLowerCase() ||
+          lead.serviceId.toLowerCase();
+        const bankName =
+          bankNames[lead.bankId]?.toLowerCase() || lead.bankId.toLowerCase();
+        const status = lead.status?.toLowerCase() || '';
+        return (
+          customerName.includes(lowercasedQuery) ||
+          serviceName.includes(lowercasedQuery) ||
+          bankName.includes(lowercasedQuery) ||
+          status.includes(lowercasedQuery)
+        );
+      });
+    }
+
 
     // Filter based on search query
     if (searchQuery.trim() !== '') {
@@ -326,8 +371,11 @@ const MyLeads = () => {
     <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
       <div className='sm:hidden block w-full py-4 m-auto z-0'>
         <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </div>
       {/* Header */}
+      <div className='flex justify-between items-center mb-4'>
+        <h1 className='text-2xl font-medium text-[#343C6A]'>Active Leads</h1>
       <div className='flex justify-between items-center mb-4'>
         <h1 className='text-2xl font-medium text-[#343C6A]'>Active Leads</h1>
 
@@ -547,6 +595,13 @@ const MyLeads = () => {
               <th className='px-4 py-2'>Date</th>
               <th className='px-4 py-2'>Status</th>
               <th className='px-4 py-2'>Action</th>
+              <th className='px-4 py-2'>Sl No</th>
+              <th className='px-4 py-2'>Name</th>
+              <th className='px-4 py-2'>Service</th>
+              <th className='px-4 py-2'>Bank Chosen</th>
+              <th className='px-4 py-2'>Date</th>
+              <th className='px-4 py-2'>Status</th>
+              <th className='px-4 py-2'>Action</th>
             </tr>
           </thead>
           <tbody className='text-left text-base text-[#212529] font-normal'>
@@ -655,6 +710,7 @@ const MyLeads = () => {
                   </div>
                 </td>
               </tr>
+            )}
             )}
           </tbody>
         </table>

@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { auth, db } from '../../firebase';
+import { collection, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore';
 import { collection, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore';
 
 const LeadDetails = () => {
@@ -137,8 +140,11 @@ const LeadDetails = () => {
       if (!user) {
         setError('User not authenticated.');
         setIsSubmitting(false);
+        setIsSubmitting(false);
         return;
       }
+
+      const leadId = generateLeadId();
 
       const leadId = generateLeadId();
 
@@ -146,6 +152,7 @@ const LeadDetails = () => {
         userId: user.uid,
         serviceId,
         bankId,
+        leadId: leadId,
         leadId: leadId,
         customerDetails: formData,
         status: 'pending',
@@ -165,6 +172,7 @@ const LeadDetails = () => {
 
       await addDoc(collection(db, 'leads'), leadData);
 
+      // After submission, navigate to confirmation page
       // After submission, navigate to confirmation page
       navigate(`/dashboard/selectbank/${serviceId}/leaddetails/confirmation`, {
         state: { customerName: formData.fullname },
