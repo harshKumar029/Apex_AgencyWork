@@ -18,6 +18,20 @@ import {
   where,
 } from 'firebase/firestore';
 import { generateEarningsCSV } from '../utils/earningsCSV';
+import { auth, db } from '../firebase';
+import {
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  addDoc,
+  Timestamp,
+  where,
+} from 'firebase/firestore';
+import { generateEarningsCSV } from '../utils/earningsCSV';
 
 const Earnings = () => {
   const [totalEarnings, setTotalEarnings] = useState(0);
