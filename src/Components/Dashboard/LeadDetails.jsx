@@ -1,19 +1,59 @@
 // src/Components/Dashboard/LeadDetails.jsx
 
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { auth, db } from '../../firebase';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore';
 
 const LeadDetails = () => {
   const navigate = useNavigate();
-  const { serviceId, bankId } = useParams(); // Get IDs from URL
+  const { serviceId, bankId } = useParams();
+  const location = useLocation(); // to get ?uploadType=...
+
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [serviceData, setServiceData] = useState(null);
+  const [earningsData, setEarningsData] = useState(null);
 
-  // Define input fields with keys matching formData
-  const inputFields = [
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch service data
+        const serviceDocRef = doc(db, 'services', serviceId);
+        const serviceDoc = await getDoc(serviceDocRef);
+        if (!serviceDoc.exists()) {
+          setError('Service not found.');
+          return;
+        }
+        const sData = serviceDoc.data();
+        setServiceData(sData);
+
+        // Fetch earnings data
+        const earningsDocRef = doc(db, 'earnings', serviceId);
+        const earningsDoc = await getDoc(earningsDocRef);
+        if (earningsDoc.exists()) {
+          setEarningsData(earningsDoc.data());
+        }
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load data.');
+      }
+    };
+
+    fetchData();
+  }, [serviceId]);
+
+  // We read the uploadType from the URL query param:
+  // e.g. ?uploadType=full or ?uploadType=partial
+  const searchParams = new URLSearchParams(location.search);
+  const uploadType = searchParams.get('uploadType');
+
+  // Check if the service is "Credit Card"
+  const isCreditCardService = serviceData?.name?.toLowerCase().includes('credit card') || false;
+
+  // Fields for credit card (full)
+  const creditCardFields = [
     { label: 'Customer Name', name: 'fullname', placeholder: 'Rohit Sharma' },
     { label: 'Father Name', name: 'fatherName', placeholder: 'Suraj Sharma' },
     { label: 'Mother Name', name: 'motherName', placeholder: 'Sushila Sharma' },
@@ -33,9 +73,39 @@ const LeadDetails = () => {
     { label: 'COMPANY PINCODE', name: 'companyPincode', placeholder: '110018' },
     { label: 'Official Email ID', name: 'officialEmail', placeholder: 'rohit@infosys.com' },
     { label: 'NET SALARY', name: 'netSalary', placeholder: '12,00,000' },
-    // Added new field
-    { label: 'Expecting Credit Limit', name: 'expectingCreditLimit', placeholder: 'Enter amount' },
   ];
+
+  // Fields for credit card (partial)
+  // Only 4 fields: 'fullname', 'mobile', 'email', 'address'
+  const partialCreditCardFields = [
+    { label: 'Customer Name', name: 'fullname', placeholder: 'Rohit Sharma' },
+    { label: 'Mobile Number', name: 'mobile', placeholder: '9876543210' },
+    { label: 'Email ID', name: 'email', placeholder: 'rohit.verma@gmail.com' },
+    { label: 'Address', name: 'address', placeholder: 'Delhi, Shastri Park, U Block' },
+  ];
+
+  // Fields for non-credit card services
+  const nonCreditCardFields = [
+    { label: 'Customer Name', name: 'fullname', placeholder: 'Rohit Sharma' },
+    { label: 'Mobile Number', name: 'mobile', placeholder: '9876543210' },
+    { label: 'Email ID', name: 'email', placeholder: 'rohit.verma@gmail.com' },
+    { label: 'Address', name: 'address', placeholder: 'Delhi, Shastri Park, U Block' },
+  ];
+
+  // Determine which fields to display
+  let inputFields = [];
+
+  if (isCreditCardService) {
+    if (uploadType === 'partial') {
+      inputFields = partialCreditCardFields;
+    } else {
+      // default to full if not partial
+      inputFields = creditCardFields;
+    }
+  } else {
+    // Non-credit card service
+    inputFields = nonCreditCardFields;
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -44,30 +114,58 @@ const LeadDetails = () => {
     });
   };
 
+  const generateLeadId = () => {
+    // Generate a 7-digit unique number. For simplicity, we'll just use Math.random.
+    // In a production environment, consider a more robust approach.
+    return Math.floor(1000000 + Math.random() * 9000000).toString();
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setError(null);
+
+    // Check if all fields are filled
+    const emptyFields = inputFields.filter((field) => !formData[field.name] || formData[field.name].trim() === '');
+    if (emptyFields.length > 0) {
+      setError('Please fill all the required fields.');
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const user = auth.currentUser;
       if (!user) {
         setError('User not authenticated.');
+        setIsSubmitting(false);
         return;
       }
+
+      const leadId = generateLeadId();
 
       const leadData = {
         userId: user.uid,
         serviceId,
         bankId,
+        leadId: leadId,
         customerDetails: formData,
         status: 'pending',
         submissionDate: Timestamp.now(),
-        amount: formData.expectingCreditLimit, // Save as 'amount' in the database
       };
+
+      // If there's an earnings amount from Firestore, add it.
+      // If credit card + partial => 80% of total
+      // else => 100% of total
+      if (earningsData && earningsData[bankId] !== undefined) {
+        if (isCreditCardService && uploadType === 'partial') {
+          leadData.earningAmount = Math.floor(earningsData[bankId] * 0.8);
+        } else {
+          leadData.earningAmount = earningsData[bankId];
+        }
+      }
 
       await addDoc(collection(db, 'leads'), leadData);
 
-      // Navigate to confirmation page and pass customer name
+      // After submission, navigate to confirmation page
       navigate(`/dashboard/selectbank/${serviceId}/leaddetails/confirmation`, {
         state: { customerName: formData.fullname },
       });
@@ -78,6 +176,14 @@ const LeadDetails = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (!serviceData) {
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className='w-[95%] m-auto mt-5 mb-28 sm:my-5'>
@@ -97,13 +203,13 @@ const LeadDetails = () => {
         </div>
       </div>
 
+      {/* Display error (e.g., missing fields) */}
       {error && (
-        <div className='text-red-500 mb-4'>
+        <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
           {error}
         </div>
       )}
 
-      {/* Form Input Fields */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {inputFields.map((field) => (
           <div key={field.name} className="flex flex-col">
@@ -123,7 +229,6 @@ const LeadDetails = () => {
         ))}
       </div>
 
-      {/* Save Button */}
       <div className="flex justify-center sm:justify-end mt-8">
         <button
           onClick={handleSubmit}
