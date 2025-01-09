@@ -207,7 +207,7 @@ const Login = () => {
   }, []);
   return (
     <div
-      className={` md:bg-blue-primary bg-black flex flex-col md:flex-row  h-screen overflow-hidden ${
+      className={` bg-blue-primary  flex flex-col md:flex-row  h-screen overflow-hidden ${
         isMobile ? 'bg-cover bg-no-repeat bg-center' : 'bg-black'
       } flex flex-col md:flex-row h-screen overflow-hidden`}
       style={{
@@ -274,12 +274,12 @@ const Login = () => {
           )}
           <div className="flex flex-col px-6 rounded-t-3xl bg-white h-screen md:h-auto  space-y-4 md:space-y-7">
             <div className=" sm:hidden flex justify-between px-2 py-2 font-bold my-5  bg-[#F5F6F9] rounded-lg">
-              <button className=" py-2 px-16 bg-white text-[#232447] text-sm rounded-lg">
+              <button className=" py-2 px-14 bg-white text-[#232447] text-sm rounded-lg">
                 Log in
               </button>
               <button
                 onClick={() => navigate("/signup")}
-                className="py-2 px-16 text-[#7D7D91] text-sm"
+                className="py-2 px-14 text-[#7D7D91] text-sm"
               >
                 Sign Up
               </button>
@@ -328,7 +328,7 @@ const Login = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#1D61E7] md:bg-blue-primary text-white py-3 md:py-2 px-4 text-lg md:text-base font-semibold rounded-lg hover:bg-[#053748] transition-colors"
+                className="w-full bg-blue-primary text-white py-3 md:py-2 px-4 text-lg md:text-base font-semibold rounded-lg hover:bg-[#053748] transition-colors"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Logging in..." : "Login"}
