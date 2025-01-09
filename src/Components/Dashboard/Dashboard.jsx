@@ -285,7 +285,7 @@ const Dashboard = () => {
               className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'
             >
               <div className="flex flex-col sm:flex-row text-center items-center p-4">
-                <img src={card.icon} alt={`${card.title} Icon`} className="w-16 h-16 mr-4" />
+                <img src={card.icon} alt={`${card.title} Icon`} className="  rounded-lg w-14 h-14 mr-4" />
                 <div >
                   <h2 className="text-[#232323]  font-semibold text-xl">{card.title}</h2>
                   <p
