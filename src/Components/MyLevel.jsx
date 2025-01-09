@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import LinkBg from '../assets/img/levelcardbg.svg'
+import linkBg from '../assets/img/levelcardbg.svg'
 
 const MyLevel = () => {
   // State variables
@@ -196,7 +196,7 @@ const MyLevel = () => {
             <div
         className="mb-6 rounded-3xl bg-cover bg-no-repeat bg-center"
         style={{
-          backgroundImage: `url(${LinkBg})`,
+          backgroundImage: `url(${linkBg})`,
         }}
       >
         <div className="space-y-3 mb-6 p-6 pt-10 pb-10">
