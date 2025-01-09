@@ -278,16 +278,16 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {cardData.map((card) => (
             <div
               key={card.id}
               className='border bg-white_custom border-[#DEE2E6] rounded-3xl hover:shadow-lg transition-shadow duration-200'
             >
-              <div className="flex items-center p-4">
+              <div className="flex flex-col sm:flex-row text-center items-center p-4">
                 <img src={card.icon} alt={`${card.title} Icon`} className="w-16 h-16 mr-4" />
-                <div>
-                  <h2 className="text-[#232323] font-semibold text-xl">{card.title}</h2>
+                <div >
+                  <h2 className="text-[#232323]  font-semibold text-xl">{card.title}</h2>
                   <p
                     onClick={() => navigate(`/dashboard/selectbank/${card.serviceId}`)}
                     className="text-[#063E50] cursor-pointer font-normal underline text-base hover:text-[#055a6a]"

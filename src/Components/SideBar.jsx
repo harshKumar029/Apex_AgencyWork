@@ -115,7 +115,12 @@ const SideBar = () => {
                 {menuItems.map((item, index) => (
                   <li
                     key={index}
-                    className="menu-item flex items-center py-[.6rem] hover:text-[#063E50] cursor-pointer"
+                    className={`menu-item flex items-center px-4 py-[.6rem] cursor-pointer transition-all ${
+                      location.pathname === item.path
+                        ? ' rounded-md  text-[#454545] bg-[#ececec] hover:text-[#ffffff] hover:bg-[#878787]'
+                        : ' rounded-md hover:text-[#ffffff]  hover:bg-[#878787]'
+                    }`}
+                    // className="menu-item flex items-center py-[.6rem] hover:text-[#063E50] cursor-pointer"
                     onClick={() => {
                       if (item.action === 'logout') {
                         handleLogout();

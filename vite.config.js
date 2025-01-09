@@ -8,5 +8,6 @@ export default defineConfig({
   },
   server: {
     historyApiFallback: true, // This ensures correct routing for Vite dev server
+    host: true,
   }
 });

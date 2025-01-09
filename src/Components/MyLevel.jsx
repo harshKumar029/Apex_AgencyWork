@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import LinkBg from '../assets/img/levelcardbg.svg'
 
 const MyLevel = () => {
   // State variables
@@ -186,10 +187,16 @@ const MyLevel = () => {
       <h1 className="text-2xl font-medium text-[#343C6A] mb-4"></h1>
 
       {/* Level Progress Card */}
-      <div
+      {/* <div
         className="mb-6 rounded-3xl"
         style={{
           background: 'linear-gradient(0deg, rgba(22,34,42,1) 23%, rgba(58,96,115,1) 83%)',
+        }}
+      > */}
+            <div
+        className="mb-6 rounded-3xl bg-cover bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${LinkBg})`,
         }}
       >
         <div className="space-y-3 mb-6 p-6 pt-10 pb-10">

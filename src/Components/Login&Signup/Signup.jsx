@@ -1,10 +1,11 @@
 // src/Components/Login&Signup/Signup.jsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Apexlogo from '../../assets/icon/Apexlogo.svg';
 import Apexlogoblue from '../../assets/icon/Apexlogoblue.svg';
 import CardImg from '../../assets/img/CardImg.svg';
+import startbg from "../../assets/img/startbg.svg";
 
 // Import Firebase functions
 import { auth, db } from '../../firebase';
@@ -210,8 +211,28 @@ const Signup = () => {
     }
   };
 
+    const [isMobile, setIsMobile] = useState(true);
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+  
+      handleResize(); // Check on load
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
   return (
-    <div className='md:bg-blue-primary bg-white flex flex-col md:flex-row h-auto h-screen overflow-hidden'>
+    // <div className='md:bg-blue-primary bg-white flex flex-col md:flex-row h-auto h-screen overflow-hidden'>
+        <div
+          className={` md:bg-blue-primary bg-black flex flex-col md:flex-row  h-screen overflow-hidden ${
+            isMobile ? 'bg-cover bg-no-repeat bg-center' : 'bg-black'
+          } flex flex-col md:flex-row h-screen overflow-hidden`}
+          style={{
+            backgroundImage: isMobile ? `url(${startbg})` : 'none',
+          }}
+        >
       {/* Left Section */}
       <section className="pt-4 hidden md:block pb-8 px-14 space-y-3 relative md:w-[45vw] h-full">
         <img className="w-36" src={Apexlogo} alt="ApexLogo" />
@@ -229,19 +250,24 @@ const Signup = () => {
       </section>
 
       {/* Right Section */}
-      <section className="w-full md:w-[55vw] h-auto md:h-full mt-10 md:mt-0 bg-white rounded-l-[2.738rem] flex md:items-center justify-center md:justify-end">
-        <div className="md:w-[45vw] w-full px-5 md:mr-28 space-y-14 md:space-y-7">
+      <section className="w-full md:w-[55vw] h-auto md:h-full mt-10 md:mt-0 rounded-l-[2.738rem] flex md:items-center justify-center md:justify-end">
+      <div className="md:w-[50vw] md:bg-white h-screen rounded-l-[3rem] content-center w-full md:px-7 space-y-14 md:space-y-7">
           {/* Header */}
-          <div className="flex justify-between items-center">
-            <h2 className="self-end md:self-auto text-[#525252] text-4xl font-bold mb-6">
-              Create Account
-            </h2>
-            <img
-              className="md:hidden block w-36"
-              src={Apexlogoblue}
+          <div className="flex flex-col w-[90%] m-auto justify-between items-start">
+          <img
+              className="md:hidden block w-20 ml-[-10px]"
+              src={Apexlogo}
               alt="ApexLogo"
             />
+            <h2 className=" text-white md:text-[#525252] text-4xl font-bold ">
+              Create Account
+            </h2>
+            <h3 className="text-[#ffffff] md:hidden block text-sm mt-2 font-thin">
+            Create an account or log in to explore about our app
+            </h3>
           </div>
+
+                
 
           {/* Display message if exists */}
           {message.text && (
@@ -258,6 +284,21 @@ const Signup = () => {
               {message.text}
             </div>
           )}
+          <div className="flex flex-col px-6 rounded-t-3xl bg-white h-screen md:h-auto  space-y-4 md:space-y-7">
+            <div className=" sm:hidden flex justify-between px-2 py-2 font-bold my-5  bg-[#F5F6F9] rounded-lg">
+              <button
+              className="py-2 px-16 text-[#7D7D91] text-sm"
+              onClick={() => navigate("/login")}
+              >
+                Log in
+              </button>
+              <button
+                onClick={() => navigate("/signup")}
+                className=" py-2 px-16 bg-white text-[#232447] text-sm rounded-lg"
+              >
+                Sign Up
+              </button>
+            </div>
 
           {/* Signup Form */}
           <form onSubmit={handleSubmit} className="space-y-7">
@@ -361,7 +402,7 @@ const Signup = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-blue-primary text-white py-3 md:py-2 px-4 font-semibold rounded-lg hover:bg-[#053748] transition-colors flex items-center justify-center"
+              className="w-full bg-[#1D61E7] md:bg-blue-primary text-white py-3 md:py-2 px-4 font-semibold rounded-lg hover:bg-[#053748] transition-colors flex items-center justify-center"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -395,7 +436,7 @@ const Signup = () => {
           </form>
 
           {/* Login Link */}
-          <div className="mt-6 text-center">
+          <div className="mt-6 hidden sm:block text-center">
             <p className="text-[#A1A1A1] flex justify-center">
               Already have an account?{' '}
               <span
@@ -406,6 +447,7 @@ const Signup = () => {
               </span>
             </p>
           </div>
+ </div>
         </div>
       </section>
     </div>
