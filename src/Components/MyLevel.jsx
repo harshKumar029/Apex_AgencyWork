@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import linkBg from '../assets/img/levelcardbg.svg'
+import linkBg from '../assets/img/levelbg.svg'
 
 const MyLevel = () => {
   // State variables
