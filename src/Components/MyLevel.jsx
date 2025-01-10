@@ -196,7 +196,8 @@ const MyLevel = () => {
             <div
         className="mb-6 rounded-3xl bg-cover bg-no-repeat bg-center"
         style={{
-          backgroundImage: `url(${linkBg})`,
+          // backgroundImage: `url(${/linkBg})`,
+          backgroundImage: 'url(/levelbg.svg)',
         }}
       >
         <div className="space-y-3 mb-6 p-6 pt-10 pb-10">
