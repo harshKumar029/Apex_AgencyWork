@@ -40,7 +40,7 @@ const BottomNavigationBar = () => {
     }
 
     return (
-        <div className="fixed z-[1000] top-auto left-0 sm:hidden w-full rounded-t-3xl bg-[#fefefe] shadow-2xl shadow-black flex justify-around items-center py-5">
+        <div className="fixed z-[10] top-auto left-0 sm:hidden w-full rounded-t-3xl bg-[#fefefe] shadow-2xl shadow-black flex justify-around items-center py-5">
             {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (

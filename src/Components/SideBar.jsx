@@ -322,10 +322,10 @@ const SideBar = () => {
             <div className="flex justify-between ml-1 mt-4">
               <img className="w-16" src={ApexLogo} alt="ApexLogo" />
               <button
-                className="md:hidden p-2"
+                className="md:hidden text-[#094052] bg-[#09405240] my-4 p-1 rounded-full"
                 onClick={() => setIsOpen(false)}
               >
-                <svg
+                {/* <svg
                   className="w-6"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -338,7 +338,10 @@ const SideBar = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </svg>
+                </svg> */}
+                <svg className="w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
               </button>
             </div>
             <div className="space-y-4">
